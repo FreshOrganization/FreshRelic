@@ -21,6 +21,8 @@
 		708AF9AF192DF57600A277F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 708AF991192DF57600A277F5 /* UIKit.framework */; };
 		708AF9B7192DF57600A277F5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 708AF9B5192DF57600A277F5 /* InfoPlist.strings */; };
 		708AF9B9192DF57600A277F5 /* FreshRelicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 708AF9B8192DF57600A277F5 /* FreshRelicTests.m */; };
+		9F9A9D45192E3E170042D76E /* FRAppAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9A9D44192E3E170042D76E /* FRAppAgent.m */; };
+		9F9A9D4A192E47D10042D76E /* FRAgentUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9A9D49192E47D10042D76E /* FRAgentUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,10 @@
 		708AF9B4192DF57600A277F5 /* FreshRelicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FreshRelicTests-Info.plist"; sourceTree = "<group>"; };
 		708AF9B6192DF57600A277F5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		708AF9B8192DF57600A277F5 /* FreshRelicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FreshRelicTests.m; sourceTree = "<group>"; };
+		9F9A9D43192E3E170042D76E /* FRAppAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRAppAgent.h; sourceTree = "<group>"; };
+		9F9A9D44192E3E170042D76E /* FRAppAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRAppAgent.m; sourceTree = "<group>"; };
+		9F9A9D48192E47D10042D76E /* FRAgentUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRAgentUtils.h; sourceTree = "<group>"; };
+		9F9A9D49192E47D10042D76E /* FRAgentUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRAgentUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +118,7 @@
 		708AF993192DF57600A277F5 /* FreshRelic */ = {
 			isa = PBXGroup;
 			children = (
+				9F9A9CFF192E3CBD0042D76E /* reliclass */,
 				708AF99C192DF57600A277F5 /* AppDelegate.h */,
 				708AF99D192DF57600A277F5 /* AppDelegate.m */,
 				708AF99F192DF57600A277F5 /* Main.storyboard */,
@@ -150,6 +157,17 @@
 				708AF9B5192DF57600A277F5 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9F9A9CFF192E3CBD0042D76E /* reliclass */ = {
+			isa = PBXGroup;
+			children = (
+				9F9A9D43192E3E170042D76E /* FRAppAgent.h */,
+				9F9A9D44192E3E170042D76E /* FRAppAgent.m */,
+				9F9A9D48192E47D10042D76E /* FRAgentUtils.h */,
+				9F9A9D49192E47D10042D76E /* FRAgentUtils.m */,
+			);
+			path = reliclass;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,9 +267,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F9A9D4A192E47D10042D76E /* FRAgentUtils.m in Sources */,
 				708AF9A4192DF57600A277F5 /* ViewController.m in Sources */,
 				708AF99E192DF57600A277F5 /* AppDelegate.m in Sources */,
 				708AF99A192DF57600A277F5 /* main.m in Sources */,
+				9F9A9D45192E3E170042D76E /* FRAppAgent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +476,7 @@
 				708AF9BE192DF57600A277F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		708AF9BF192DF57600A277F5 /* Build configuration list for PBXNativeTarget "FreshRelicTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +485,7 @@
 				708AF9C1192DF57600A277F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

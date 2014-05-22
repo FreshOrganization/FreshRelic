@@ -7,12 +7,14 @@
 //
 
 #import "AppDelegate.h"
-
+#import "FRAppAgent.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    FRAppAgent *fr = [[FRAppAgent alloc] init];
+    
     return YES;
 }
 							
