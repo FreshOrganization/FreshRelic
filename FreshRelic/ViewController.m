@@ -17,9 +17,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"nidayed ");
+    NSLog(@"nidayed fdsf");
     
-    NSLog(@"nidfdsfdsfdayed ");    NSLog(@"nidfdsfdsfdayed ");    NSLog(@"nidfdsfdsfdayed ");    NSLog(@"nidfdsfdsfdayed ");    NSLog(@"nidfdsfdsfdayed ");
+    NSLog(@"nidfdsfdsfdayfdsfed ");    NSLog(@"nidfdsfdsfdsffdayed ");    NSLog(@"nidfdsfdsfdayed ");    NSLog(@"nidfdsfdsfdayed ");    NSLog(@"nidfdsfdsfdayed ");
 
 	// Do any additional setup after loading the view, typically from a nib.
 }
