@@ -41,6 +41,11 @@
     FRDeviceInfo *deviceinfo = [[FRDeviceInfo alloc] init];
     float ver = [deviceinfo getIOSVersion];
     NSLog(@"the ver is:%f",ver);
+    
+//    NSLog(@"%@",[NSString stringWithUTF8String:__FILE__] );
+//    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]] delegate:self];
+    NSURLConnection *conn = [NSURLConnection connectionWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]] delegate:self];
+    [conn start];
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,4 +54,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - NSURLConnectionDelegate
+#pragma mark - NSURLConnectionDataDelegate
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    NSLog(@"%@",connection);
+}
 @end
