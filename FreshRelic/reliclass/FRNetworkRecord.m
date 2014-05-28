@@ -270,4 +270,39 @@ totalBytesExpectedToWrite:totalBytesExpectedToWrite];
         
     }
 }
+
+
+#pragma mark - NSURLConnectionDownloadDelegate
+- (void)connection:(NSURLConnection *)connection didWriteData:(long long)bytesWritten totalBytesWritten:(long long)totalBytesWritten expectedTotalBytes:(long long) expectedTotalBytes
+{
+    id<NSURLConnectionDownloadDelegate> obj = [self getDelegateFormConnection:connection];
+    SEL sel = _cmd;
+    //    NSURLRequest *req = nil;
+    
+    if ([obj respondsToSelector:sel]) {
+        [obj connection:connection didWriteData:bytesWritten totalBytesWritten:totalBytesWritten expectedTotalBytes:expectedTotalBytes];
+    }
+}
+- (void)connectionDidResumeDownloading:(NSURLConnection *)connection totalBytesWritten:(long long)totalBytesWritten expectedTotalBytes:(long long) expectedTotalBytes
+{
+    id<NSURLConnectionDownloadDelegate> obj = [self getDelegateFormConnection:connection];
+    SEL sel = _cmd;
+    //    NSURLRequest *req = nil;
+    
+    if ([obj respondsToSelector:sel]) {
+        [obj connectionDidResumeDownloading:connection totalBytesWritten:totalBytesWritten expectedTotalBytes:expectedTotalBytes];
+    }
+}
+
+
+- (void)connectionDidFinishDownloading:(NSURLConnection *)connection destinationURL:(NSURL *) destinationURL
+{
+    id<NSURLConnectionDownloadDelegate> obj = [self getDelegateFormConnection:connection];
+    SEL sel = _cmd;
+    //    NSURLRequest *req = nil;
+    
+    if ([obj respondsToSelector:sel]) {
+        [obj connectionDidFinishDownloading:connection destinationURL:destinationURL];
+    }
+}
 @end
