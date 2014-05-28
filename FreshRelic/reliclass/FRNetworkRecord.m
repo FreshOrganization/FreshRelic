@@ -101,9 +101,13 @@ static FRNetworkRecord* sharedInstance = nil;
 {
     NSInteger index = [self.connArray indexOfObject:connection];
     NSObject *obj = _delegateArray[index];
+    if ([obj isEqual:[NSNull null]]) {
+        return nil;
+    }
     return obj;
 }
 #pragma mark - NSURLConnectionDelegate
+
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     NSObject *obj = [self getDelegateFormConnection:connection];
@@ -115,6 +119,8 @@ static FRNetworkRecord* sharedInstance = nil;
         
     }
 }
+
+
 - (BOOL)connectionShouldUseCredentialStorage:(NSURLConnection *)connection
 {
     
@@ -129,6 +135,9 @@ static FRNetworkRecord* sharedInstance = nil;
     }
     return YES;
 }
+ 
+ 
+
 - (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
     NSObject *obj = [self getDelegateFormConnection:connection];
@@ -140,6 +149,7 @@ static FRNetworkRecord* sharedInstance = nil;
         
     }
 }
+ 
 
 // Deprecated authentication delegates.
 - (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace
@@ -177,11 +187,12 @@ static FRNetworkRecord* sharedInstance = nil;
 }
 
 #pragma mark - NSURLConnectionDataDelegate
+
 - (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response
 {
     id<NSURLConnectionDataDelegate> obj = [self getDelegateFormConnection:connection];
     SEL sel = _cmd;
-    NSURLRequest *req = nil;
+    NSURLRequest *req = request;
     
     if ([obj respondsToSelector:sel]) {
         req =[obj connection:connection willSendRequest:request redirectResponse:response];
@@ -189,6 +200,8 @@ static FRNetworkRecord* sharedInstance = nil;
     }
     return req;
 }
+
+
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     NSObject *obj = [self getDelegateFormConnection:connection];
@@ -273,6 +286,7 @@ totalBytesExpectedToWrite:totalBytesExpectedToWrite];
 
 
 #pragma mark - NSURLConnectionDownloadDelegate
+/*
 - (void)connection:(NSURLConnection *)connection didWriteData:(long long)bytesWritten totalBytesWritten:(long long)totalBytesWritten expectedTotalBytes:(long long) expectedTotalBytes
 {
     id<NSURLConnectionDownloadDelegate> obj = [self getDelegateFormConnection:connection];
@@ -305,4 +319,7 @@ totalBytesExpectedToWrite:totalBytesExpectedToWrite];
         [obj connectionDidFinishDownloading:connection destinationURL:destinationURL];
     }
 }
+ */
+
+
 @end

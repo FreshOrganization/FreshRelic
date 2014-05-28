@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 //网络记录
-@interface FRNetworkRecord : NSObject <NSURLConnectionDelegate,NSURLConnectionDataDelegate,NSURLConnectionDownloadDelegate>
+@interface FRNetworkRecord : NSObject <NSURLConnectionDelegate,NSURLConnectionDataDelegate>
 
 +(FRNetworkRecord*)sharedFRNetworkRecord;
 @property (nonatomic,retain) NSMutableArray *connArray;
