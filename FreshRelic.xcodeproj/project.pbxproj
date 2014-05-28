@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		65BF6BA71935ADB900483ADE /* FRNetworkRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BF6BA61935ADB900483ADE /* FRNetworkRecord.m */; };
+		702F028F1935DDE3007273B6 /* FRDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 702F028E1935DDE3007273B6 /* FRDeviceInfo.m */; };
 		708AF98E192DF57600A277F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 708AF98D192DF57600A277F5 /* Foundation.framework */; };
 		708AF990192DF57600A277F5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 708AF98F192DF57600A277F5 /* CoreGraphics.framework */; };
 		708AF992192DF57600A277F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 708AF991192DF57600A277F5 /* UIKit.framework */; };
@@ -39,6 +40,8 @@
 /* Begin PBXFileReference section */
 		65BF6BA51935ADB900483ADE /* FRNetworkRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRNetworkRecord.h; sourceTree = "<group>"; };
 		65BF6BA61935ADB900483ADE /* FRNetworkRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRNetworkRecord.m; sourceTree = "<group>"; };
+		702F028D1935DDE3007273B6 /* FRDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRDeviceInfo.h; sourceTree = "<group>"; };
+		702F028E1935DDE3007273B6 /* FRDeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRDeviceInfo.m; sourceTree = "<group>"; };
 		708AF98A192DF57600A277F5 /* FreshRelic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreshRelic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		708AF98D192DF57600A277F5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		708AF98F192DF57600A277F5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -171,6 +174,8 @@
 				9F9A9D49192E47D10042D76E /* FRAgentUtils.m */,
 				65BF6BA51935ADB900483ADE /* FRNetworkRecord.h */,
 				65BF6BA61935ADB900483ADE /* FRNetworkRecord.m */,
+				702F028D1935DDE3007273B6 /* FRDeviceInfo.h */,
+				702F028E1935DDE3007273B6 /* FRDeviceInfo.m */,
 			);
 			path = reliclass;
 			sourceTree = "<group>";
@@ -277,6 +282,7 @@
 				708AF99E192DF57600A277F5 /* AppDelegate.m in Sources */,
 				65BF6BA71935ADB900483ADE /* FRNetworkRecord.m in Sources */,
 				708AF99A192DF57600A277F5 /* main.m in Sources */,
+				702F028F1935DDE3007273B6 /* FRDeviceInfo.m in Sources */,
 				9F9A9D45192E3E170042D76E /* FRAppAgent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,6 +411,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FreshRelic/FreshRelic-Prefix.pch";
 				INFOPLIST_FILE = "FreshRelic/FreshRelic-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -418,6 +425,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FreshRelic/FreshRelic-Prefix.pch";
 				INFOPLIST_FILE = "FreshRelic/FreshRelic-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
