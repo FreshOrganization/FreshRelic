@@ -7,7 +7,7 @@
 //
 
 #import "FRAppAgent.h"
-
+#import "FRNetworkRecord.h"
 static FRAppAgent *frAppAgent;
 
 @interface FRAppAgent()<NSURLConnectionDataDelegate>
@@ -28,6 +28,9 @@ static FRAppAgent *frAppAgent;
 {
     // 去服务端进行appid的验证 并根据回复信息进行自定义的设置
     [[FRAppAgent shareStance] setConnect];
+    
+    [FRNetworkRecord sharedFRNetworkRecord];
+    
 }
 
 // 运行时编程 进行nsurlconnect的监听
