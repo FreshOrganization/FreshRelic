@@ -13,8 +13,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    FRAppAgent *fr = [[FRAppAgent alloc] init];
-    
+//    FRAppAgent *fr = [[FRAppAgent alloc] init];
+    [FRAppAgent startWithAppID:@"xxx"];
     return YES;
 }
 							

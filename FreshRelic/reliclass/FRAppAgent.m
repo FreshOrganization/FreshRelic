@@ -31,6 +31,8 @@ static FRAppAgent *frAppAgent;
     
     [FRNetworkRecord sharedFRNetworkRecord];
     
+    
+    
 }
 
 // 运行时编程 进行nsurlconnect的监听
