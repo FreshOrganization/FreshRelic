@@ -34,4 +34,22 @@
     return version;
 }
 
+-(NSString *)getAPPVersion
+{
+    NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+    NSString *localVersion = [infoDic objectForKey:@"CFBundleShortVersionString"];
+    return localVersion;
+}
+
+-(NSString *)getFRVersion
+{
+    return FRVersion;
+}
+
+-(NSString *)getDeviceType
+{
+    NSString *phoneModel = [[UIDevice currentDevice] model];
+    return phoneModel;
+}
+
 @end

@@ -8,10 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+#define FRVersion @"1.0"
+
 @interface FRDeviceInfo : NSObject
 
 -(NSString *)getDeviceUUID;
 
 -(float)getIOSVersion;
+
+-(NSString *)getAPPVersion;
+
+-(NSString *)getFRVersion;
+
+-(NSString *)getDeviceType;
 
 @end
