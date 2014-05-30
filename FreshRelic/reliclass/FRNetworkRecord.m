@@ -75,9 +75,16 @@ static FRNetworkRecord* sharedInstance = nil;
     if (self) {
         self.connArray = [[NSMutableArray alloc] init];
         self.delegateArray = [[NSMutableArray alloc] init];
+        self.startTimeArray = [[NSMutableArray alloc] init];
+        self.responseTimeArray = [[NSMutableArray alloc] init];
+        self.endTimeArray = [[NSMutableArray alloc] init];
+        self.dataArray = [[NSMutableArray alloc] init];
+        self.responseArray = [[NSMutableArray alloc] init];
+        self.threadCallStacks = [[NSMutableArray alloc] init];
         
         
-        Method m1 =    class_getInstanceMethod([NSURLConnection class], @selector(initWithRequest:delegate:));
+        
+        Method m1 = class_getInstanceMethod([NSURLConnection class], @selector(initWithRequest:delegate:));
         
         Method m2 = class_getInstanceMethod([Conn class], @selector(newInitWithRequest:delegate:));
         
@@ -110,6 +117,22 @@ static FRNetworkRecord* sharedInstance = nil;
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
+    [_threadCallStacks addObject:[NSThread callStackSymbols]];
+    NSInteger errorCode = error.code;
+    switch (errorCode) {
+        case NSURLErrorTimedOut:
+        {
+//        超时
+        }
+            break;
+            case NSURLErrorNetworkConnectionLost:
+        {
+//            链接超时
+        }
+            
+        default:
+            break;
+    }
     NSObject *obj = [self getDelegateFormConnection:connection];
     SEL sel = _cmd;
     if ([obj respondsToSelector:sel]) {
@@ -186,10 +209,19 @@ static FRNetworkRecord* sharedInstance = nil;
     }
 }
 
+
+-(NSTimeInterval)currentTimeInterval
+{
+    NSDate *date = [NSDate date];
+    NSTimeInterval interval = [date timeIntervalSince1970];
+    return interval;
+}
 #pragma mark - NSURLConnectionDataDelegate
 
 - (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response
 {
+    [_startTimeArray addObject:[NSDate date]];
+    
     id<NSURLConnectionDataDelegate> obj = [self getDelegateFormConnection:connection];
     SEL sel = _cmd;
     NSURLRequest *req = request;
@@ -204,6 +236,9 @@ static FRNetworkRecord* sharedInstance = nil;
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
+    [_responseTimeArray addObject:[NSDate date]];
+    [_dataArray addObject:[NSMutableData data]];
+    [_responseTimeArray addObject:response];
     NSObject *obj = [self getDelegateFormConnection:connection];
     SEL sel = _cmd;
     if ([obj respondsToSelector:sel]) {
@@ -216,6 +251,10 @@ static FRNetworkRecord* sharedInstance = nil;
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
+    NSInteger index = [_connArray indexOfObject:connection];
+    NSMutableData *totalData = _dataArray[index];
+    [totalData appendData:data];
+    
     NSObject *obj = [self getDelegateFormConnection:connection];
     SEL sel = _cmd;
     if ([obj respondsToSelector:sel]) {
@@ -239,6 +278,7 @@ static FRNetworkRecord* sharedInstance = nil;
     }
     return stream;
 }
+
 - (void)connection:(NSURLConnection *)connection
    didSendBodyData:(NSInteger)bytesWritten
  totalBytesWritten:(NSInteger)totalBytesWritten
@@ -274,6 +314,7 @@ totalBytesExpectedToWrite:totalBytesExpectedToWrite];
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+    [_endTimeArray addObject:[NSDate date]];
     NSObject *obj = [self getDelegateFormConnection:connection];
     SEL sel = _cmd;
     if ([obj respondsToSelector:sel]) {
