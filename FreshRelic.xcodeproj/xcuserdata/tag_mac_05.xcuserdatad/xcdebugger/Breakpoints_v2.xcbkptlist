@@ -9,29 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FreshRelic/ViewController.m"
-            timestampString = "423113459.984581"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "-connectionDidFinishLoading:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "FreshRelic/reliclass/FRNetworkRecord.m"
-            timestampString = "423113421.269573"
+            timestampString = "423116506.665176"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "311"
-            endingLineNumber = "311"
-            landmarkName = "-connectionDidFinishLoading:"
+            startingLineNumber = "313"
+            endingLineNumber = "313"
+            landmarkName = "-connection:willCacheResponse:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

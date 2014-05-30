@@ -238,6 +238,8 @@ static FRNetworkRecord* sharedInstance = nil;
 {
     [_responseTimeArray addObject:[NSDate date]];
     [_dataArray addObject:[NSMutableData data]];
+//    NSInteger statusCode = [(NSHTTPURLResponse*)response statusCode];
+//    NSLog(@"%@",[NSHTTPURLResponse localizedStringForStatusCode:statusCode]);
     [_responseTimeArray addObject:response];
     NSObject *obj = [self getDelegateFormConnection:connection];
     SEL sel = _cmd;

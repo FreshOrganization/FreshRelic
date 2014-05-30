@@ -46,7 +46,7 @@
     
 //    NSLog(@"%@",[NSString stringWithUTF8String:__FILE__] );
 //    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]] delegate:self];
-    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://wweqwewqw.ajsdsakjdklsadlsasa.com"]];
+    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
     [req setTimeoutInterval:10];
     NSURLConnection *conn = [NSURLConnection connectionWithRequest:req delegate:self];
     [conn start];
