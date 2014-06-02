@@ -8,6 +8,10 @@
 
 #import "FRDeviceInfo.h"
 
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <CoreTelephony/CTCarrier.h>
+
+
 @implementation FRDeviceInfo
 
 -(NSString *)getDeviceUUID
@@ -52,4 +56,15 @@
     return phoneModel;
 }
 
+-(NSDictionary*)getCarrierInfo{
+    CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
+    NSLog(@"network %@",networkInfo.currentRadioAccessTechnology);//7.0
+    NSLog(@"net %@",networkInfo.subscriberCellularProvider.carrierName);
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:networkInfo.currentRadioAccessTechnology,@"technology",networkInfo.subscriberCellularProvider.carrierName,@"carriername", nil];
+    return dic;
+}
+
+
 @end
+
+

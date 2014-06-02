@@ -11,6 +11,8 @@
 
 @interface ViewController ()
 
+@property(nonatomic,strong)FRDeviceInfo *testINfo;
+
 @end
 
 @implementation ViewController
@@ -51,6 +53,11 @@
     NSURLConnection *conn = [NSURLConnection connectionWithRequest:req delegate:self];
     [conn start];
 //    NSLog(@"%@",[NSThread callStackReturnAddresses]);
+    
+//    [deviceinfo getAddressDictonarytest];
+    
+    self.testINfo = [[FRDeviceInfo alloc] init];
+//    [self.testINfo getAddressDictonarytest];
 }
 
 - (void)didReceiveMemoryWarning

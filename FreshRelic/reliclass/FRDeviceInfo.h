@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 #define FRVersion @"1.0"
 
 @interface FRDeviceInfo : NSObject
@@ -21,5 +22,7 @@
 -(NSString *)getFRVersion;
 
 -(NSString *)getDeviceType;
+
+-(NSDictionary*)getCarrierInfo;
 
 @end
