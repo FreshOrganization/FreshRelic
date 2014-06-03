@@ -44,11 +44,11 @@
 
 -(void)getAddressInfo{
 
-    if ([CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorized) {
+//    if ([CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorized) {
         self.locationManager = [[CLLocationManager alloc] init];
         self.locationManager.delegate = self;
         [self.locationManager startUpdatingLocation];
-    }
+//    }
 }
 
 // 运行时编程 进行nsurlconnect的监听
@@ -63,11 +63,23 @@
     NSLog(@"array %@ %f",[locations objectAtIndex:0],location.coordinate.latitude);
     [manager stopUpdatingLocation];
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder reverseGeocodeLocation:manager.location   completionHandler:^(NSArray *placemarks, NSError *error) {
-        CLPlacemark *placeMark = [placemarks objectAtIndex:0];
-        NSLog(@"1:%@2:%@3:%@4:%@5:%@",placeMark.locality,placeMark.subLocality,placeMark.location,placeMark.country,placeMark.administrativeArea);
-       
-        
+    CLLocation *ll = [[CLLocation alloc] initWithLatitude:100 longitude:100];
+    [geocoder reverseGeocodeLocation:ll   completionHandler:^(NSArray *placemarks, NSError *error) {
+        CLPlacemark *placemark = [placemarks objectAtIndex:0];
+//        NSLog(@"1:%@2:%@3:%@4:%@5:%@",placeMark.locality,placeMark.subLocality,placeMark.location,placeMark.country,placeMark.administrativeArea);
+        NSLog(@"name:%@\n country:%@\n postalCode:%@\n ISOcountryCode:%@\n ocean:%@\n inlandWater:%@\n locality:%@\n subLocality:%@ \n administrativeArea:%@\n subAdministrativeArea:%@\n thoroughfare:%@\n subThoroughfare:%@\n",
+              placemark.name,
+              placemark.country,
+              placemark.postalCode,
+              placemark.ISOcountryCode,
+              placemark.ocean,
+              placemark.inlandWater,
+              placemark.locality,
+              placemark.subLocality,
+              placemark.administrativeArea,
+              placemark.subAdministrativeArea,
+              placemark.thoroughfare,
+              placemark.subThoroughfare);
     }];
     
 }
