@@ -11,7 +11,7 @@
 		18661C09193B168E00F8F2C9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18661C08193B168E00F8F2C9 /* CoreLocation.framework */; };
 		65BF6BA71935ADB900483ADE /* FRNetworkRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BF6BA61935ADB900483ADE /* FRNetworkRecord.m */; };
 		702F028F1935DDE3007273B6 /* FRDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 702F028E1935DDE3007273B6 /* FRDeviceInfo.m */; };
-		706A6EB01946F22600FB0636 /* UncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 706A6EAF1946F22600FB0636 /* UncaughtExceptionHandler.m */; };
+		706A6EB01946F22600FB0636 /* FRUncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 706A6EAF1946F22600FB0636 /* FRUncaughtExceptionHandler.m */; };
 		708AF98E192DF57600A277F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 708AF98D192DF57600A277F5 /* Foundation.framework */; };
 		708AF990192DF57600A277F5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 708AF98F192DF57600A277F5 /* CoreGraphics.framework */; };
 		708AF992192DF57600A277F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 708AF991192DF57600A277F5 /* UIKit.framework */; };
@@ -47,8 +47,8 @@
 		65BF6BA61935ADB900483ADE /* FRNetworkRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRNetworkRecord.m; sourceTree = "<group>"; };
 		702F028D1935DDE3007273B6 /* FRDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRDeviceInfo.h; sourceTree = "<group>"; };
 		702F028E1935DDE3007273B6 /* FRDeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRDeviceInfo.m; sourceTree = "<group>"; };
-		706A6EAE1946F22600FB0636 /* UncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UncaughtExceptionHandler.h; sourceTree = "<group>"; };
-		706A6EAF1946F22600FB0636 /* UncaughtExceptionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UncaughtExceptionHandler.m; sourceTree = "<group>"; };
+		706A6EAE1946F22600FB0636 /* FRUncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRUncaughtExceptionHandler.h; sourceTree = "<group>"; };
+		706A6EAF1946F22600FB0636 /* FRUncaughtExceptionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRUncaughtExceptionHandler.m; sourceTree = "<group>"; };
 		708AF98A192DF57600A277F5 /* FreshRelic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreshRelic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		708AF98D192DF57600A277F5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		708AF98F192DF57600A277F5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -187,8 +187,8 @@
 				65BF6BA61935ADB900483ADE /* FRNetworkRecord.m */,
 				702F028D1935DDE3007273B6 /* FRDeviceInfo.h */,
 				702F028E1935DDE3007273B6 /* FRDeviceInfo.m */,
-				706A6EAE1946F22600FB0636 /* UncaughtExceptionHandler.h */,
-				706A6EAF1946F22600FB0636 /* UncaughtExceptionHandler.m */,
+				706A6EAE1946F22600FB0636 /* FRUncaughtExceptionHandler.h */,
+				706A6EAF1946F22600FB0636 /* FRUncaughtExceptionHandler.m */,
 			);
 			path = reliclass;
 			sourceTree = "<group>";
@@ -291,7 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F9A9D4A192E47D10042D76E /* FRAgentUtils.m in Sources */,
-				706A6EB01946F22600FB0636 /* UncaughtExceptionHandler.m in Sources */,
+				706A6EB01946F22600FB0636 /* FRUncaughtExceptionHandler.m in Sources */,
 				708AF9A4192DF57600A277F5 /* ViewController.m in Sources */,
 				708AF99E192DF57600A277F5 /* AppDelegate.m in Sources */,
 				65BF6BA71935ADB900483ADE /* FRNetworkRecord.m in Sources */,

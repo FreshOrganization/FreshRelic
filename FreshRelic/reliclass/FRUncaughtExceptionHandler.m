@@ -1,5 +1,5 @@
 
-#import "UncaughtExceptionHandler.h"
+#import "FRUncaughtExceptionHandler.h"
 #include <libkern/OSAtomic.h>
 #include <execinfo.h>
 
@@ -14,7 +14,7 @@ const int32_t UncaughtExceptionMaximum = 10;
 const NSInteger UncaughtExceptionHandlerSkipAddressCount = 4;
 const NSInteger UncaughtExceptionHandlerReportAddressCount = 5;
 
-@implementation UncaughtExceptionHandler
+@implementation FRUncaughtExceptionHandler
 
 + (NSArray *)backtrace
 {
@@ -110,14 +110,14 @@ void HandleException(NSException *exception)
         return;
     }
     
-    NSArray *callStack = [UncaughtExceptionHandler backtrace];
+    NSArray *callStack = [FRUncaughtExceptionHandler backtrace];
     NSMutableDictionary *userInfo =
     [NSMutableDictionary dictionaryWithDictionary:[exception userInfo]];
     [userInfo
      setObject:callStack
      forKey:UncaughtExceptionHandlerAddressesKey];
     
-    [[[UncaughtExceptionHandler alloc] init]
+    [[[FRUncaughtExceptionHandler alloc] init]
      performSelectorOnMainThread:@selector(handleException:)
      withObject:
      [NSException
@@ -140,12 +140,12 @@ void SignalHandler(int signal)
      dictionaryWithObject:[NSNumber numberWithInt:signal]
      forKey:UncaughtExceptionHandlerSignalKey];
     
-    NSArray *callStack = [UncaughtExceptionHandler backtrace];
+    NSArray *callStack = [FRUncaughtExceptionHandler backtrace];
     [userInfo
      setObject:callStack
      forKey:UncaughtExceptionHandlerAddressesKey];
     
-    [[[UncaughtExceptionHandler alloc] init]
+    [[[FRUncaughtExceptionHandler alloc] init]
      performSelectorOnMainThread:@selector(handleException:)
      withObject:
      [NSException
@@ -171,6 +171,3 @@ void InstallUncaughtExceptionHandler(void)
     signal(SIGBUS, SignalHandler);
     signal(SIGPIPE, SignalHandler);
 }
-
-
-//该代码片段来自于: http://www.sharejs.com/codes/objectc/5882

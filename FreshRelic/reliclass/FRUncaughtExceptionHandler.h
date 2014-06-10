@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 Lijinfeng. All rights reserved.
 //
 
-@interface UncaughtExceptionHandler : NSObject{
+@interface FRUncaughtExceptionHandler : NSObject{
     BOOL dismissed;
 }
 

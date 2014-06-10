@@ -8,7 +8,7 @@
 
 #import "FRAppAgent.h"
 #import "FRNetworkRecord.h"
-#import "UncaughtExceptionHandler.h"
+#import "FRUncaughtExceptionHandler.h"
 
 #import <CoreLocation/CoreLocation.h>
 
