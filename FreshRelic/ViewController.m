@@ -44,6 +44,7 @@
     float ver = [deviceinfo getIOSVersion];
     NSString *appversion = [deviceinfo getAPPVersion];
     NSString *devicetype = [deviceinfo getDeviceType];
+    double appMemory = [deviceinfo getCurrentMemory];
     NSLog(@"the device type is:%@",devicetype);
     
 //    NSLog(@"%@",[NSString stringWithUTF8String:__FILE__] );
@@ -58,8 +59,21 @@
     
     self.testINfo = [[FRDeviceInfo alloc] init];
 //    [self.testINfo getAddressDictonarytest];
+    
+    
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
+    [btn setTitle:@"崩溃按钮" forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(btnTouch) forControlEvents:UIControlEventTouchUpInside];
+    btn.center = self.view.center;
+    btn.backgroundColor = [UIColor blueColor];
+    [self.view addSubview:btn];
 }
-
+-(void)btnTouch
+{
+    NSLog(@"---------");
+    NSArray *arry=[NSArray arrayWithObject:@"sss"];
+    NSLog(@"%@",[arry objectAtIndex:1]);
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

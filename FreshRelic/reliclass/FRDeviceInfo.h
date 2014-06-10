@@ -24,5 +24,11 @@
 -(NSString *)getDeviceType;
 
 -(NSDictionary*)getCarrierInfo;
+    
+// 获取当前应用所占内存 单位字节
+-(double)getCurrentMemory;
+
+// 获取CPU使用率 支持获取多核
+- (NSArray *)cpuUsage;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "FRAppAgent.h"
 #import "FRNetworkRecord.h"
+#import "UncaughtExceptionHandler.h"
 
 #import <CoreLocation/CoreLocation.h>
 
@@ -39,7 +40,8 @@
     
     [[FRAppAgent shareStance] getAddressInfo];
     
-    
+    // 异常捕获注册
+    InstallUncaughtExceptionHandler();
 }
 
 -(void)getAddressInfo{
