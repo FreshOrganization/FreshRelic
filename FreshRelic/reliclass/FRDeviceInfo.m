@@ -11,22 +11,29 @@
 #import <CoreTelephony/CTCarrier.h>
 #import <sys/sysctl.h>
 #import <mach/mach.h>
+#import "FRMyKeyChainHelper.h"
+
 @implementation FRDeviceInfo
 
 -(NSString *)getDeviceUUID
 {
     NSString *uuid = @"";
-    if ([self getIOSVersion] < 6)
+    uuid = [FRMyKeyChainHelper getTokenWithService:FRUUID];
+    if (uuid == nil)
     {
-        CFUUIDRef uuidRef = CFUUIDCreate(NULL);
-        CFStringRef uuidStringRef = CFUUIDCreateString(NULL, uuidRef);
-        CFRelease(uuidRef);
-        uuid = [NSString stringWithString:(__bridge NSString *)uuidStringRef];
-        CFRelease(uuidStringRef);
-    }
-    else
-    {
-        uuid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        if ([self getIOSVersion] < 6)
+        {
+            CFUUIDRef uuidRef = CFUUIDCreate(NULL);
+            CFStringRef uuidStringRef = CFUUIDCreateString(NULL, uuidRef);
+            CFRelease(uuidRef);
+            uuid = [NSString stringWithString:(__bridge NSString *)uuidStringRef];
+            CFRelease(uuidStringRef);
+        }
+        else
+        {
+            uuid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        }
+        [FRMyKeyChainHelper saveToken:uuid tokenService:FRUUID];
     }
     return uuid;
 }

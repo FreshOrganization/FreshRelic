@@ -10,6 +10,7 @@
 
 
 #define FRVersion @"1.0"
+#define FRUUID @"FRUUID"
 
 @interface FRDeviceInfo : NSObject
 

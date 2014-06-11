@@ -20,32 +20,33 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSUserDefaults *userd = [NSUserDefaults standardUserDefaults];
-    
-//    NSLog(@"测试一下");
-    //3A3D324D-6060-447B-BE46-525AE2FF36A2
-    //6A80CDB0-1226-4DDF-841E-4FDDD3DF264E
-    NSString *u = [userd objectForKey:@"myuuid"];
-    if (u)
-    {
-        NSLog(@"the u is:%@",u);
-    }
-    else
-    {
-        FRDeviceInfo *deviceinfo = [[FRDeviceInfo alloc] init];
-        NSString *uuid = [deviceinfo getDeviceUUID];
-        NSLog(@"uuid:%@",uuid);
-        
-        [userd setObject:uuid forKey:@"myuuid"];
-        [userd synchronize];
-    }
+//    NSUserDefaults *userd = [NSUserDefaults standardUserDefaults];
+//    
+////    NSLog(@"测试一下");
+//    //3A3D324D-6060-447B-BE46-525AE2FF36A2
+//    //6A80CDB0-1226-4DDF-841E-4FDDD3DF264E
+//    NSString *u = [userd objectForKey:@"myuuid"];
+//    if (u)
+//    {
+//        NSLog(@"the u is:%@",u);
+//    }
+//    else
+//    {
+//        FRDeviceInfo *deviceinfo = [[FRDeviceInfo alloc] init];
+//        NSString *uuid = [deviceinfo getDeviceUUID];
+//        NSLog(@"uuid:%@",uuid);
+//        
+//        [userd setObject:uuid forKey:@"myuuid"];
+//        [userd synchronize];
+//    }
     
     FRDeviceInfo *deviceinfo = [[FRDeviceInfo alloc] init];
     float ver = [deviceinfo getIOSVersion];
     NSString *appversion = [deviceinfo getAPPVersion];
     NSString *devicetype = [deviceinfo getDeviceType];
     double appMemory = [deviceinfo getCurrentMemory];
-    NSLog(@"the device type is:%@",devicetype);
+    NSString *fruuid = [deviceinfo getDeviceUUID];
+    NSLog(@"the device fruuid is:%@",fruuid);
     
 //    NSLog(@"%@",[NSString stringWithUTF8String:__FILE__] );
 //    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]] delegate:self];
