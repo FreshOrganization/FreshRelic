@@ -15,6 +15,8 @@
 
 @interface FRAppAgent()<NSURLConnectionDataDelegate,CLLocationManagerDelegate>
 
+@property(nonatomic,strong)NSString *appKey;
+@property(nonatomic,strong)NSDictionary *locationDic;
 @property(nonatomic,strong)CLLocationManager *locationManager;
 
 @end
@@ -31,31 +33,49 @@
 
 }
 
-+(void)startWithAppID:(NSString*)appId
++(void)startWithAppID:(NSString*)appId isUseLocation:(BOOL)allow
 {
-    // 去服务端进行appid的验证 并根据回复信息进行自定义的设置
-    [[FRAppAgent shareStance] setConnect];
+    //初始化接口
+    NSURL *url = [NSURL URLWithString:@""];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    
+    NSString *timeStr = [NSString stringWithFormat:@"%ld",(long)[[NSDate date] timeIntervalSince1970]];
+    [request setAllHTTPHeaderFields:[NSDictionary dictionaryWithObjectsAndKeys:appId,@"ak",timeStr,@"tm",nil]];
+    
+    NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithCapacity:10];
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:dataDic options:NSJSONWritingPrettyPrinted error:nil];
+    [request setHTTPBody:postData];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if (connectionError==nil) {
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            if ([[dic objectForKey:@"en"] intValue]==0 ) {
+                //初始化成功,开始监听
+                [[FRAppAgent shareStance] startMonitor];
+            }
+        }
+    }];
+    //临时执行
+    [[FRAppAgent shareStance] startMonitor];
+}
+
+-(void)startMonitor{
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    [self.locationManager startUpdatingLocation];
     
     [FRNetworkRecord sharedFRNetworkRecord];
     
-    [[FRAppAgent shareStance] getAddressInfo];
-    
     // 异常捕获注册
     InstallUncaughtExceptionHandler();
+    
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(reportDataToServer) userInfo:nil repeats:YES];
+    [timer fire];
 }
 
--(void)getAddressInfo{
-
-//    if ([CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorized) {
-        self.locationManager = [[CLLocationManager alloc] init];
-        self.locationManager.delegate = self;
-        [self.locationManager startUpdatingLocation];
-//    }
-}
-
-// 运行时编程 进行nsurlconnect的监听
--(void)setConnect
-{
+//上报数据
+-(void)reportDataToServer{
     
 }
 
@@ -65,9 +85,9 @@
     NSLog(@"array %@ %f",[locations objectAtIndex:0],location.coordinate.latitude);
     [manager stopUpdatingLocation];
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    CLLocation *ll = [[CLLocation alloc] initWithLatitude:100 longitude:100];
-    [geocoder reverseGeocodeLocation:ll   completionHandler:^(NSArray *placemarks, NSError *error) {
+    [geocoder reverseGeocodeLocation:location   completionHandler:^(NSArray *placemarks, NSError *error) {
         CLPlacemark *placemark = [placemarks objectAtIndex:0];
+        self.locationDic = [NSDictionary dictionaryWithObjectsAndKeys:placemark.country,@"cu",placemark.locality,@"prv",placemark.administrativeArea,@"ct",nil];
 //        NSLog(@"1:%@2:%@3:%@4:%@5:%@",placeMark.locality,placeMark.subLocality,placeMark.location,placeMark.country,placeMark.administrativeArea);
         NSLog(@"name:%@\n country:%@\n postalCode:%@\n ISOcountryCode:%@\n ocean:%@\n inlandWater:%@\n locality:%@\n subLocality:%@ \n administrativeArea:%@\n subAdministrativeArea:%@\n thoroughfare:%@\n subThoroughfare:%@\n",
               placemark.name,
@@ -90,5 +110,6 @@
     
     NSLog(@"error %@",error.description);
 }
+
 
 @end

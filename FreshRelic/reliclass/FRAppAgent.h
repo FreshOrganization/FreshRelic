@@ -11,6 +11,6 @@
 @interface FRAppAgent : NSObject
 
 // 初始化
-+(void)startWithAppID:(NSString*)appId;
++(void)startWithAppID:(NSString*)appId isUseLocation:(BOOL)allow;
 
 @end

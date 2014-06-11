@@ -35,6 +35,10 @@
 
 //故障的时候线程的堆栈
 @property (nonatomic,retain) NSMutableArray *threadCallStacks;
+
+//采集http数据
+@property(nonatomic,retain)NSMutableDictionary *httpReportDataDic;
+
 @end
 /*
  1.url  直接通过connection获得request，再获得url    搞定

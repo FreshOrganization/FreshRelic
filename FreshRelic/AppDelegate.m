@@ -14,7 +14,7 @@
 {
     // Override point for customization after application launch.
 //    FRAppAgent *fr = [[FRAppAgent alloc] init];
-    [FRAppAgent startWithAppID:@"xxx"];
+    [FRAppAgent startWithAppID:@"xxx" isUseLocation:YES];
     return YES;
 }
 							
