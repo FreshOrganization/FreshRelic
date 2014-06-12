@@ -21,7 +21,7 @@
     uuid = [FRMyKeyChainHelper getTokenWithService:FRUUID];
     if (uuid == nil)
     {
-        if ([self getIOSVersion] < 6)
+        if ([[self getIOSVersion] floatValue]  < 6)
         {
             CFUUIDRef uuidRef = CFUUIDCreate(NULL);
             CFStringRef uuidStringRef = CFUUIDCreateString(NULL, uuidRef);
@@ -38,10 +38,11 @@
     return uuid;
 }
 
--(float)getIOSVersion
+-(NSString *)getIOSVersion
 {
     float version = [[[UIDevice currentDevice] systemVersion] floatValue];
-    return version;
+    NSString *str = [NSString stringWithFormat:@"%f",version];
+    return str;
 }
 
 -(NSString *)getAPPVersion

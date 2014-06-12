@@ -41,7 +41,6 @@
 //    }
     
     FRDeviceInfo *deviceinfo = [[FRDeviceInfo alloc] init];
-    float ver = [deviceinfo getIOSVersion];
     NSString *appversion = [deviceinfo getAPPVersion];
     NSString *devicetype = [deviceinfo getDeviceType];
     double appMemory = [deviceinfo getCurrentMemory];

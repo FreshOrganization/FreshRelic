@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-
+#define FR_Protocal_Ver @"1.0"
 #define FRVersion @"1.0"
 #define FRUUID @"FRUUID"
 
@@ -16,7 +16,7 @@
 
 -(NSString *)getDeviceUUID;
 
--(float)getIOSVersion;
+-(NSString *)getIOSVersion;
 
 -(NSString *)getAPPVersion;
 
