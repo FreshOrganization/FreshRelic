@@ -30,6 +30,15 @@
 -(double)getCurrentMemory;
 
 // 获取CPU使用率 支持获取多核
-- (NSArray *)cpuUsage;
+-(NSArray *)cpuUsage;
+
+// 获取应用名称
+-(NSString *)getDisplayName;
+
+// 获取boundle id
+-(NSString *)getBoundleID;
+
+// 获取屏幕尺寸
+-(NSString *)getScreenSize;
 
 @end

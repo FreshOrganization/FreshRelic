@@ -45,7 +45,10 @@
     NSString *devicetype = [deviceinfo getDeviceType];
     double appMemory = [deviceinfo getCurrentMemory];
     NSString *fruuid = [deviceinfo getDeviceUUID];
-    NSLog(@"the device fruuid is:%@",fruuid);
+    NSString *appName = [deviceinfo getDisplayName];
+    NSString *appBoundle = [deviceinfo getBoundleID];
+    NSString *rect = [deviceinfo getScreenSize];
+    NSLog(@"the device screen is:%@",rect);
     
 //    NSLog(@"%@",[NSString stringWithUTF8String:__FILE__] );
 //    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]] delegate:self];

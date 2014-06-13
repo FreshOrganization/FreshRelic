@@ -52,6 +52,27 @@
     return localVersion;
 }
 
+-(NSString *)getDisplayName
+{
+    NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+    NSString *appName = [infoDic objectForKey:@"CFBundleDisplayName"];
+    return appName;
+}
+
+-(NSString *)getBoundleID
+{
+    NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+    NSString *boundleid = [infoDic objectForKey:@"CFBundleIdentifier"];
+    return boundleid;
+}
+
+-(NSString *)getScreenSize
+{
+    int width = [[UIScreen mainScreen] bounds].size.width;
+    int height = [[UIScreen mainScreen] bounds].size.height;
+    return [NSString stringWithFormat:@"%d*%d",width,height];
+}
+
 -(NSString *)getFRVersion
 {
     return FRVersion;
