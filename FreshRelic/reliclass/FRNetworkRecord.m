@@ -13,56 +13,26 @@ Stuff; \
 _Pragma("clang diagnostic pop") \
 } while (0)
 #import "FRNetworkRecord.h"
-@interface Conn:NSURLConnection
-- (id)newInitWithRequest:(NSURLRequest *)request delegate:(id)delegate;
-+ (NSURLConnection *)newConnectionWithRequest:(NSURLRequest *)request delegate:(id < NSURLConnectionDelegate >)delegate;
-@end
-@implementation Conn
 
-+ (instancetype)newConnectionWithRequest:(NSURLRequest *)request delegate:(id < NSURLConnectionDelegate >)delegate
-{
-    FRNetworkRecord *center = [FRNetworkRecord sharedFRNetworkRecord];
-    Conn *conn = [[Conn alloc] initWithRequest:request delegate:center];
-    [center.connArray addObject:conn];
-    if (delegate==nil) {
-        [center.delegateArray addObject:[NSNull null]];
-    }else
-    {
-    [center.delegateArray addObject:delegate];
-    }
-    return conn;
-}
-
-
-- (id)newInitWithRequest:(NSURLRequest *)request delegate:(id)delegate
-{
-    //    self = [self initWithRequest:request delegate:delegate];
-    FRNetworkRecord *center = [FRNetworkRecord sharedFRNetworkRecord];
-    
-    NSURLConnection *conn  = [[NSURLConnection alloc] initWithRequest:request delegate:center startImmediately:NO];
-    
-    [center.connArray addObject:conn];
-    
-    if (delegate==nil) {
-        [center.delegateArray addObject:[NSNull null]];
-    }else
-    {
-        [center.delegateArray addObject:delegate];
-    }
-    
-    //    NSLog(@"a111111");
-    return conn;
-}
-
-
-+(void)newSendSynchronousRequest:(NSURLRequest *)request queue:(NSOperationQueue *)queue completionHandler:(void (^)(NSURLResponse*, NSData*, NSError*))handler
-{
-    
-}
-
-@end
 @implementation FRNetworkRecord
 static FRNetworkRecord* sharedInstance = nil;
+
+
++(void)addConn:(NSURLConnection*)conn andDelegate:(id<NSURLConnectionDelegate>)delegate
+{
+    if (conn) {
+        NSNull *null = [NSNull null];
+        FRNetworkRecord *record = [FRNetworkRecord sharedFRNetworkRecord];
+        
+        [record.connArray addObject:conn];
+        if (delegate) {
+            [record.delegateArray addObject:delegate];
+        }else
+        {
+            [record.delegateArray addObject:null];
+        }
+    }
+}
 +(FRNetworkRecord*)sharedFRNetworkRecord
 {
     static dispatch_once_t onceToken;
@@ -103,7 +73,8 @@ static FRNetworkRecord* sharedInstance = nil;
         method_exchangeImplementations(m1, m2);
         */
         
-        
+        NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]] delegate:nil];
+        [conn start];
 //        [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]
         
 //        NSData *data = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]] returningResponse:nil error:nil];

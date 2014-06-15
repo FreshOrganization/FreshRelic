@@ -8,6 +8,7 @@
 
 #import "NSURLConnection+Swizzling.h"
 #import "JRSwizzle.h"
+
 @implementation NSURLConnection (Swizzling)
 
 +(void)exchangeSel:(SEL)sel1 with:(SEL)sel2
@@ -70,21 +71,27 @@
 
 #pragma  mark - 需要重写的方法
 
+
 - (id)xxx_initWithRequest:(NSURLRequest *)request delegate:(id < NSURLConnectionDelegate >)delegate
 {
     [self xxx_initWithRequest:request delegate:delegate];
+    [FRNetworkRecord addConn:self andDelegate:delegate];
     return self;
 }
 
 - (id)xxx_initWithRequest:(NSURLRequest *)request delegate:(id < NSURLConnectionDelegate >)delegate startImmediately:(BOOL)startImmediately
 {
+    [FRNetworkRecord addConn:self andDelegate:delegate];
     [self xxx_initWithRequest:request delegate:delegate startImmediately:startImmediately];
+
     return self;
 }
 
 + (NSURLConnection *)xxx_connectionWithRequest:(NSURLRequest *)request delegate:(id < NSURLConnectionDelegate >)delegate
 {
+    
     NSURLConnection *conn = [NSURLConnection xxx_connectionWithRequest:request delegate:delegate];
+    [FRNetworkRecord addConn:conn andDelegate:delegate];
     return conn;
 }
 

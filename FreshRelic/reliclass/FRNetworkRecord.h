@@ -14,10 +14,13 @@
 @interface FRNetworkRecord : NSObject <NSURLConnectionDelegate,NSURLConnectionDataDelegate>
 
 +(FRNetworkRecord*)sharedFRNetworkRecord;
-//链接数组
+
++(void)addConn:(NSURLConnection*)conn andDelegate:(id<NSURLConnectionDelegate>)delegate;
+
+//链接数组  NSURLConnection
 @property (nonatomic,retain) NSMutableArray *connArray;
 
-//delegate数组
+//delegate数组  
 @property (nonatomic,retain) NSMutableArray *delegateArray;
 
 //开始时间 Date
