@@ -57,6 +57,7 @@ __strong static FRNetworkRecord* sharedInstance = nil;
     self.responseArray = [[NSMutableArray alloc] init];
     self.threadCallStacks = [[NSMutableArray alloc] init];
     self.finishStatus = [[NSMutableArray alloc] init];
+    self.requestInfo = [[NSMutableArray alloc] init];
 }
 
 //- (instancetype)init
@@ -114,6 +115,9 @@ __strong static FRNetworkRecord* sharedInstance = nil;
 
 -(id)getDelegateFormConnection:(NSURLConnection*)connection
 {
+    if (!connection) {
+        return nil;
+    }
     NSInteger index = [self.connArray indexOfObject:connection];
     if (index == NSNotFound) {
         return nil;
@@ -182,15 +186,17 @@ __strong static FRNetworkRecord* sharedInstance = nil;
 {
     
 //    SEL sel = NSSelectorFromString(NSStringFromSelector(_cmd));
-    
+    return YES;
     SEL sel = _cmd;
-    NSObject *obj = [self getDelegateFormConnection:connection];
+    NSInteger index = [_connArray indexOfObject:connection];
+    id obj = _delegateArray[index];
+//    NSObject *obj = [self getDelegateFormConnection:connection];
     if ([obj respondsToSelector:sel]) {
         BOOL flag;
         SuppressPerformSelectorLeakWarning(flag = (BOOL)[obj performSelector:sel withObject:connection]);
         return flag;
     }
-    return YES;
+    return NO;
 }
  
  
@@ -264,6 +270,8 @@ __strong static FRNetworkRecord* sharedInstance = nil;
     [pas setValuesForKeysWithDictionary:[request allHTTPHeaderFields]];
     [dict setValue:dict forKey:@"pas"];
     
+    
+    [_requestInfo addObject:dict];
 //    NSData *data = [[NSData alloc] initwith]
 //    [dict setValue:<#(id)#> forKey:<#(NSString *)#>]
     
@@ -274,13 +282,14 @@ __strong static FRNetworkRecord* sharedInstance = nil;
     id<NSURLConnectionDataDelegate> obj = [self getDelegateFormConnection:connection];
     SEL sel = _cmd;
     NSURLRequest *req = request;
-    
+    return req;
     if ([obj respondsToSelector:sel]) {
         req =[obj connection:connection willSendRequest:request redirectResponse:response];
         return req;
     }
     return req;
 }
+
 
 
 
@@ -405,7 +414,7 @@ totalBytesExpectedToWrite:totalBytesExpectedToWrite];
     
     
     NSData *data = _dataArray[[_connArray indexOfObject:connection]];
-    [dict setValue:[data bytes] forKey:@"rd"];
+    [dict setValue:[NSString stringWithFormat:@"%d",[data length] ]forKey:@"rd"];
     
     [dict setValue:[NSString stringWithFormat:@"%f",currentTime] forKey:@"tm"];
     

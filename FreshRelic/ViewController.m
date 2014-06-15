@@ -52,7 +52,8 @@
     NSLog(@"the device screen is:%@",rect);
     
 //    NSLog(@"%@",[NSString stringWithUTF8String:__FILE__] );
-//    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]] delegate:self];
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]] delegate:self startImmediately:NO];
+    [conn start];
 //    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
 //    [req setTimeoutInterval:10];
 //    NSURLConnection *conn = [NSURLConnection connectionWithRequest:req delegate:self];

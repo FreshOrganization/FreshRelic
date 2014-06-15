@@ -54,6 +54,8 @@
         
         [self jr_swizzleMethod:@selector(initWithRequest:delegate:startImmediately:) withMethod:@selector(xxx_initWithRequest:delegate:startImmediately:) error:nil];
         
+        [self jr_swizzleClassMethod:@selector(start) withClassMethod:@selector(xxx_start) error:nil];
+        
         [self jr_swizzleClassMethod:@selector(sendSynchronousRequest:returningResponse:error:) withClassMethod:@selector(xxx_sendSynchronousRequest:returningResponse:error:) error:nil];
         
         
@@ -71,7 +73,23 @@
 
 
 #pragma  mark - 需要重写的方法
-
+-(void)xxx_start
+{
+    [self xxx_start];
+    FRNetworkRecord *record = [FRNetworkRecord sharedFRNetworkRecord];
+    [record.startTimeArray addObject:[NSDate date]];
+    
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    [dict setValue:self.originalRequest.URL forKey:@"url"];
+    
+    
+    NSMutableDictionary *pas = [NSMutableDictionary dictionary];
+    [pas setValuesForKeysWithDictionary:[self.originalRequest allHTTPHeaderFields]];
+    [dict setValue:dict forKey:@"pas"];
+    
+    
+    [record.requestInfo addObject:dict];
+}
 
 - (id)xxx_initWithRequest:(NSURLRequest *)request delegate:(id < NSURLConnectionDelegate >)delegate
 {
@@ -89,10 +107,24 @@
 {
     FRNetworkRecord *record = [FRNetworkRecord sharedFRNetworkRecord];
     
-    [self xxx_initWithRequest:request delegate:delegate startImmediately:startImmediately];
+    [self xxx_initWithRequest:request delegate:record startImmediately:startImmediately];
 
-    [FRNetworkRecord addConn:self andDelegate:record];
+    [FRNetworkRecord addConn:self andDelegate:delegate];
+
     
+    
+    [record.startTimeArray addObject:[NSDate date]];
+    
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    [dict setValue:self.originalRequest.URL forKey:@"url"];
+    
+    
+    NSMutableDictionary *pas = [NSMutableDictionary dictionary];
+    [pas setValuesForKeysWithDictionary:[self.originalRequest allHTTPHeaderFields]];
+    [dict setValue:dict forKey:@"pas"];
+    
+    
+    [record.requestInfo addObject:dict];
     return self;
 }
 
