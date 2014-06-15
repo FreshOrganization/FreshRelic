@@ -105,6 +105,7 @@
 
 - (id)xxx_initWithRequest:(NSURLRequest *)request delegate:(id < NSURLConnectionDelegate >)delegate startImmediately:(BOOL)startImmediately
 {
+    
     FRNetworkRecord *record = [FRNetworkRecord sharedFRNetworkRecord];
     
     [self xxx_initWithRequest:request delegate:record startImmediately:startImmediately];
