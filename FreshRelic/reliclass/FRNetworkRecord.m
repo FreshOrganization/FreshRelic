@@ -88,7 +88,7 @@ static FRNetworkRecord* sharedInstance = nil;
         self.threadCallStacks = [[NSMutableArray alloc] init];
         
         
-        
+        /*
         Method m1 = class_getInstanceMethod([NSURLConnection class], @selector(initWithRequest:delegate:));
         
         Method m2 = class_getInstanceMethod([Conn class], @selector(newInitWithRequest:delegate:));
@@ -101,11 +101,14 @@ static FRNetworkRecord* sharedInstance = nil;
         m2 = class_getClassMethod([Conn class], @selector(newSendSynchronousRequest:queue:completionHandler:));
         
         method_exchangeImplementations(m1, m2);
+        */
         
         
+//        [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]
         
+//        NSData *data = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]] returningResponse:nil error:nil];
+//        NSLog(@"%@",data);
         
-//        NSLog(@"%@",obj);
 
     }
     return self;
@@ -119,6 +122,9 @@ static FRNetworkRecord* sharedInstance = nil;
 -(id)getDelegateFormConnection:(NSURLConnection*)connection
 {
     NSInteger index = [self.connArray indexOfObject:connection];
+    if (index == NSNotFound) {
+        return nil;
+    }
     NSObject *obj = _delegateArray[index];
     if ([obj isEqual:[NSNull null]]) {
         return nil;

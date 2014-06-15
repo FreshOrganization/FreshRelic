@@ -10,6 +10,8 @@
 	<string>FreshRelic</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>21A4CCEE-DAFC-4C02-A122-49CDD0E85D59</key>
+		<string>git://github.com/rentzsch/jrswizzle.git</string>
 		<key>898037BF-BCBD-4544-8F7D-1CEBEE479DFE</key>
 		<string>https://github.com/FreshOrganization/FreshRelic.git</string>
 	</dict>
@@ -17,6 +19,8 @@
 	<string>FreshRelic.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>21A4CCEE-DAFC-4C02-A122-49CDD0E85D59</key>
+		<string>../../FreshRelic/JRSwizzle</string>
 		<key>898037BF-BCBD-4544-8F7D-1CEBEE479DFE</key>
 		<string>../..</string>
 	</dict>
@@ -35,6 +39,14 @@
 			<string>898037BF-BCBD-4544-8F7D-1CEBEE479DFE</string>
 			<key>IDESourceControlWCCName</key>
 			<string>FreshRelic</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>21A4CCEE-DAFC-4C02-A122-49CDD0E85D59</string>
+			<key>IDESourceControlWCCName</key>
+			<string>JRSwizzle</string>
 		</dict>
 	</array>
 </dict>

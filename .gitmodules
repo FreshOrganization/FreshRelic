@@ -1,0 +1,3 @@
+[submodule "FreshRelic/JRSwizzle"]
+	path = FreshRelic/JRSwizzle
+	url = git://github.com/rentzsch/jrswizzle.git

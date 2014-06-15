@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
+
+#import "NSURLConnection+Swizzling.h"
 //网络记录
 @interface FRNetworkRecord : NSObject <NSURLConnectionDelegate,NSURLConnectionDataDelegate>
 

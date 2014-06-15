@@ -29,6 +29,8 @@
 		9F9A9D45192E3E170042D76E /* FRAppAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9A9D44192E3E170042D76E /* FRAppAgent.m */; };
 		9F9A9D4A192E47D10042D76E /* FRAgentUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9A9D49192E47D10042D76E /* FRAgentUtils.m */; };
 		9FC8E1861948A1A500E29F04 /* FRMyKeyChainHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FC8E1851948A1A500E29F04 /* FRMyKeyChainHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E408CEC2194D3B5D007F579B /* NSURLConnection+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = E408CEC1194D3B5D007F579B /* NSURLConnection+Swizzling.m */; };
+		E408CEC5194D3C6E007F579B /* NSData+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = E408CEC4194D3C6E007F579B /* NSData+Swizzling.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,10 @@
 		9F9A9D49192E47D10042D76E /* FRAgentUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRAgentUtils.m; sourceTree = "<group>"; };
 		9FC8E1841948A1A500E29F04 /* FRMyKeyChainHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRMyKeyChainHelper.h; sourceTree = "<group>"; };
 		9FC8E1851948A1A500E29F04 /* FRMyKeyChainHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRMyKeyChainHelper.m; sourceTree = "<group>"; };
+		E408CEC0194D3B5D007F579B /* NSURLConnection+Swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLConnection+Swizzling.h"; sourceTree = "<group>"; };
+		E408CEC1194D3B5D007F579B /* NSURLConnection+Swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLConnection+Swizzling.m"; sourceTree = "<group>"; };
+		E408CEC3194D3C6E007F579B /* NSData+Swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Swizzling.h"; sourceTree = "<group>"; };
+		E408CEC4194D3C6E007F579B /* NSData+Swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Swizzling.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +200,10 @@
 				702F028E1935DDE3007273B6 /* FRDeviceInfo.m */,
 				706A6EAE1946F22600FB0636 /* FRUncaughtExceptionHandler.h */,
 				706A6EAF1946F22600FB0636 /* FRUncaughtExceptionHandler.m */,
+				E408CEC0194D3B5D007F579B /* NSURLConnection+Swizzling.h */,
+				E408CEC1194D3B5D007F579B /* NSURLConnection+Swizzling.m */,
+				E408CEC3194D3C6E007F579B /* NSData+Swizzling.h */,
+				E408CEC4194D3C6E007F579B /* NSData+Swizzling.m */,
 			);
 			path = reliclass;
 			sourceTree = "<group>";
@@ -297,9 +307,11 @@
 			files = (
 				9F9A9D4A192E47D10042D76E /* FRAgentUtils.m in Sources */,
 				706A6EB01946F22600FB0636 /* FRUncaughtExceptionHandler.m in Sources */,
+				E408CEC2194D3B5D007F579B /* NSURLConnection+Swizzling.m in Sources */,
 				708AF9A4192DF57600A277F5 /* ViewController.m in Sources */,
 				708AF99E192DF57600A277F5 /* AppDelegate.m in Sources */,
 				65BF6BA71935ADB900483ADE /* FRNetworkRecord.m in Sources */,
+				E408CEC5194D3C6E007F579B /* NSData+Swizzling.m in Sources */,
 				708AF99A192DF57600A277F5 /* main.m in Sources */,
 				702F028F1935DDE3007273B6 /* FRDeviceInfo.m in Sources */,
 				9FC8E1861948A1A500E29F04 /* FRMyKeyChainHelper.m in Sources */,
