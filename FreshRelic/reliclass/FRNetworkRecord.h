@@ -19,6 +19,8 @@
 
 +(FRNetworkRecord*)sharedFRNetworkRecord;
 
+-(void)initRecord;
+
 +(void)addConn:(NSURLConnection*)conn andDelegate:(id<NSURLConnectionDelegate>)delegate;
 
 //链接数组  NSURLConnection

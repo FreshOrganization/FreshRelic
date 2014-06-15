@@ -35,7 +35,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "382"
             endingLineNumber = "382"
-            landmarkName = "-connectionDidFinishLoading:"
+            landmarkName = "+sharedFRNetworkRecord"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -51,7 +51,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "245"
             endingLineNumber = "245"
-            landmarkName = "-connection:willSendRequest:redirectResponse:"
+            landmarkName = "+sharedFRNetworkRecord"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
