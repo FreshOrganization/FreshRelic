@@ -38,8 +38,9 @@
     
     FRNetworkRecord *record = [FRNetworkRecord sharedFRNetworkRecord];
     
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setValue:aURL forKey:@"url"];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:record.carrierDic];
+    [dict setValue:[NSNumber numberWithBool:NO] forKey:@"isError"];
+    [dict setValue:[NSString stringWithFormat:@"%@",aURL] forKey:@"url"];
     [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"ret"];
     [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"fpt"];
     [dict setValue:[NSString stringWithFormat:@"%d",[data length]] forKey:@"rd"];
@@ -58,8 +59,9 @@
     
     FRNetworkRecord *record = [FRNetworkRecord sharedFRNetworkRecord];
     
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setValue:aURL forKey:@"url"];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:record.carrierDic];
+    [dict setValue:[NSNumber numberWithBool:NO] forKey:@"isError"];
+    [dict setValue:[NSString stringWithFormat:@"%@",aURL] forKey:@"url"];
     [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"ret"];
     [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"fpt"];
     [dict setValue:[NSString stringWithFormat:@"%d",[data length]] forKey:@"rd"];

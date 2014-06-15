@@ -129,8 +129,8 @@
 
 -(NSDictionary*)getCarrierInfo{
     CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
-    NSLog(@"network %@",networkInfo.currentRadioAccessTechnology);//7.0
-    NSLog(@"net %@",networkInfo.subscriberCellularProvider.carrierName);
+//    NSLog(@"network %@",networkInfo.currentRadioAccessTechnology);//7.0
+//    NSLog(@"net %@",networkInfo.subscriberCellularProvider.carrierName);
     NSString *net_type;
     if ([[Reachability reachabilityForLocalWiFi]currentReachabilityStatus]!=NotReachable ) {
         net_type = @"1";//

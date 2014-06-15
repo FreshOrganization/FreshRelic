@@ -59,6 +59,11 @@ __strong static FRNetworkRecord* sharedInstance = nil;
     self.finishStatus = [[NSMutableArray alloc] init];
     self.requestInfo = [[NSMutableArray alloc] init];
     self.tongbuInfo = [[NSMutableArray alloc] init];
+    
+    self.requestInfo = [[NSMutableArray alloc] init];
+    
+    FRDeviceInfo *deviceInfo = [[FRDeviceInfo alloc] init];
+    self.carrierDic = [deviceInfo getCarrierInfo];
 }
 
 //- (instancetype)init
@@ -146,7 +151,7 @@ __strong static FRNetworkRecord* sharedInstance = nil;
     
     
     NSMutableDictionary *dict = _requestInfo[[self currentConnIndex:connection]];
-    [dict setValue:[NSNumber numberWithBool:NO] forKey:@"isFinish"];
+    [dict setValue:[NSNumber numberWithBool:YES] forKey:@"isError"];
     
     NSInteger errorCode = error.code;
     switch (errorCode) {
@@ -263,22 +268,17 @@ __strong static FRNetworkRecord* sharedInstance = nil;
 {
     [_startTimeArray addObject:[NSDate date]];
     
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    [dict setValue:request.URL forKey:@"url"];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:self.carrierDic];
+//    [dict setValue:[NSNumber numberWithBool:NO] forKey:@"isError"];
+    [dict setValue:[NSString stringWithFormat:@"%@",request.URL] forKey:@"url"];
     
     
     NSMutableDictionary *pas = [NSMutableDictionary dictionary];
     [pas setValuesForKeysWithDictionary:[request allHTTPHeaderFields]];
-    [dict setValue:dict forKey:@"pas"];
+    [dict setValue:pas forKey:@"pas"];
     
     
     [_requestInfo addObject:dict];
-//    NSData *data = [[NSData alloc] initwith]
-//    [dict setValue:<#(id)#> forKey:<#(NSString *)#>]
-    
-
-    
-    
     
     id<NSURLConnectionDataDelegate> obj = [self getDelegateFormConnection:connection];
     SEL sel = _cmd;
@@ -420,7 +420,7 @@ totalBytesExpectedToWrite:totalBytesExpectedToWrite];
     [dict setValue:[NSString stringWithFormat:@"%f",currentTime] forKey:@"tm"];
     
     
-    [dict setValue:[NSNumber numberWithBool:YES] forKey:@"isFinish"];
+    [dict setValue:[NSNumber numberWithBool:NO] forKey:@"isError"];
     
     NSObject *obj = [self getDelegateFormConnection:connection];
     SEL sel = _cmd;

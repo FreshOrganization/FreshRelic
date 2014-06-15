@@ -8,37 +8,9 @@
 
 #import "NSURLConnection+Swizzling.h"
 #import "JRSwizzle.h"
+#import "FRDeviceInfo.h"
 
 @implementation NSURLConnection (Swizzling)
-
-+(void)exchangeSel:(SEL)sel1 with:(SEL)sel2
-{
-    Class class = [self class];
-    
-    // When swizzling a class method, use the following:
-    // Class class = object_getClass((id)self);
-    
-    SEL originalSelector = sel1;
-    SEL swizzledSelector = sel2;
-    
-    Method originalMethod = class_getInstanceMethod(class, originalSelector);
-    Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
-    
-    BOOL didAddMethod =
-    class_addMethod(class,
-                    originalSelector,
-                    method_getImplementation(swizzledMethod),
-                    method_getTypeEncoding(swizzledMethod));
-    
-    if (didAddMethod) {
-        class_replaceMethod(class,
-                            swizzledSelector,
-                            method_getImplementation(originalMethod),
-                            method_getTypeEncoding(originalMethod));
-    } else {
-        method_exchangeImplementations(originalMethod, swizzledMethod);
-    }
-}
 
 + (void)load
 {
@@ -79,13 +51,13 @@
     FRNetworkRecord *record = [FRNetworkRecord sharedFRNetworkRecord];
     [record.startTimeArray addObject:[NSDate date]];
     
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    [dict setValue:self.originalRequest.URL forKey:@"url"];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:record.carrierDic];
+    [dict setValue:[NSString stringWithFormat:@"%@",self.originalRequest.URL] forKey:@"url"];
     
     
     NSMutableDictionary *pas = [NSMutableDictionary dictionary];
     [pas setValuesForKeysWithDictionary:[self.originalRequest allHTTPHeaderFields]];
-    [dict setValue:dict forKey:@"pas"];
+    [dict setValue:pas forKey:@"pas"];
     
     
     [record.requestInfo addObject:dict];
@@ -112,17 +84,15 @@
 
     [FRNetworkRecord addConn:self andDelegate:delegate];
 
-    
-    
     [record.startTimeArray addObject:[NSDate date]];
     
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    [dict setValue:self.originalRequest.URL forKey:@"url"];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:record.carrierDic];
+    [dict setValue:[NSString stringWithFormat:@"%@",self.originalRequest.URL] forKey:@"url"];
     
     
     NSMutableDictionary *pas = [NSMutableDictionary dictionary];
     [pas setValuesForKeysWithDictionary:[self.originalRequest allHTTPHeaderFields]];
-    [dict setValue:dict forKey:@"pas"];
+    [dict setValue:pas forKey:@"pas"];
     
     
     [record.requestInfo addObject:dict];
@@ -145,16 +115,48 @@
     NSTimeInterval endTime = [self getCurrentTimeInterval];
     
     FRNetworkRecord *record = [FRNetworkRecord sharedFRNetworkRecord];
-    
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setValue:request.URL forKey:@"url"];
-    [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"ret"];
-    [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"fpt"];
-    [dict setValue:[NSString stringWithFormat:@"%d",[data length]] forKey:@"rd"];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:record.carrierDic];
+    [dict setValue:[NSString stringWithFormat:@"%@",request.URL] forKey:@"url"];
     [dict setValue:[NSString stringWithFormat:@"%f",endTime] forKey:@"tm"];
-    
-    
+    if ([*response isKindOfClass:[NSHTTPURLResponse class]]) {
+        NSInteger statusCode = [(NSHTTPURLResponse*)*response statusCode];
+        // String，HTTP状态码，如400
+        [dict setValue:[NSString stringWithFormat:@"%d",statusCode] forKey:@"htp"];
+    }
+    if (error==nil) {//正常http
+        [dict setValue:[NSNumber numberWithBool:NO] forKey:@"isError"];
+        [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"ret"];
+        [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"fpt"];
+        [dict setValue:[NSString stringWithFormat:@"%d",[data length]] forKey:@"rd"];
+        
+    }else{//错误http
+        [dict setValue:[NSNumber numberWithBool:YES] forKey:@"isError"];
+//        NSInteger errorCode = error.code;
+//        switch (errorCode) {
+//            case NSURLErrorTimedOut:
+//            {
+//                //        超时
+//                [dict setValue:@"3" forKey:@"nte"];
+//            }
+//                break;
+//            case NSURLErrorNetworkConnectionLost:
+//            {
+//                //            链接超时
+//                [dict setValue:@"2" forKey:@"nte"];
+//            }
+//                break;
+//            case NSURLErrorDNSLookupFailed:
+//            {
+//                //        DNS无法解析
+//                [dict setValue:@"1" forKey:@"nte"];
+//            }break;
+//            default:
+//                break;
+//        }
+        
+    }
     [record.tongbuInfo addObject:dict];
+    
     
     return data;
 }
@@ -173,15 +175,46 @@
         NSTimeInterval endTime = [self getCurrentTimeInterval];
         
         FRNetworkRecord *record = [FRNetworkRecord sharedFRNetworkRecord];
-        
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        [dict setValue:request.URL forKey:@"url"];
-        [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"ret"];
-        [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"fpt"];
-        [dict setValue:[NSString stringWithFormat:@"%d",[data length]] forKey:@"rd"];
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:record.carrierDic];
+        [dict setValue:[NSString stringWithFormat:@"%@",request.URL] forKey:@"url"];
         [dict setValue:[NSString stringWithFormat:@"%f",endTime] forKey:@"tm"];
-        
-        
+        if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+            NSInteger statusCode = [(NSHTTPURLResponse*)response statusCode];
+            // String，HTTP状态码，如400
+            [dict setValue:[NSString stringWithFormat:@"%d",statusCode] forKey:@"htp"];
+        }
+        if (connectionError==nil) {//正常http
+            [dict setValue:[NSNumber numberWithBool:NO] forKey:@"isError"];
+            [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"ret"];
+            [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"fpt"];
+            [dict setValue:[NSString stringWithFormat:@"%d",[data length]] forKey:@"rd"];
+            
+        }else{//错误http
+            [dict setValue:[NSNumber numberWithBool:YES] forKey:@"isError"];
+            NSInteger errorCode = connectionError.code;
+            switch (errorCode) {
+                case NSURLErrorTimedOut:
+                {
+                    //        超时
+                    [dict setValue:@"3" forKey:@"nte"];
+                }
+                    break;
+                case NSURLErrorNetworkConnectionLost:
+                {
+                    //            链接超时
+                    [dict setValue:@"2" forKey:@"nte"];
+                }
+                    break;
+                case NSURLErrorDNSLookupFailed:
+                {
+                    //        DNS无法解析
+                    [dict setValue:@"1" forKey:@"nte"];
+                }break;
+                default:
+                    break;
+            }
+
+        }
         [record.tongbuInfo addObject:dict];
     }];
     

@@ -62,7 +62,7 @@
     
 //    [deviceinfo getAddressDictonarytest];
     
-    self.testINfo = [[FRDeviceInfo alloc] init];
+//    self.testINfo = [[FRDeviceInfo alloc] init];
 //    [self.testINfo getAddressDictonarytest];
     
     
@@ -74,25 +74,25 @@
     [self.view addSubview:btn];
     
     // 测试 url
-    /*
+    
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
     NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:req delegate:self];
         [conn start];
-     */
+     
 //    NSURL *url = [NSURL URLWithString:@"http://pica.nipic.com/2007-12-12/20071212235955316_2.jpg"];
 //    NSData *resultData = [NSData dataWithContentsOfURL:url];
-    NSString *urlString = [NSString stringWithFormat:@"http://itunes.apple.com/lookup?id=%@", @"728266494"];
-    
-    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"==utf8=%@", urlString);
-    NSURL *url1 = [NSURL URLWithString:urlString];
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url1 cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
-    
-    [request setHTTPMethod:@"POST"];//设置请求方式为POST，默认为GET
-    
-    
-    NSData *received = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+//    NSString *urlString = [NSString stringWithFormat:@"http://itunes.apple.com/lookup?id=%@", @"728266494"];
+//    
+//    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    NSLog(@"==utf8=%@", urlString);
+//    NSURL *url1 = [NSURL URLWithString:urlString];
+//    
+//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url1 cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+//    
+//    [request setHTTPMethod:@"POST"];//设置请求方式为POST，默认为GET
+//    
+//    
+//    NSData *received = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
 
 }
 -(void)btnTouch

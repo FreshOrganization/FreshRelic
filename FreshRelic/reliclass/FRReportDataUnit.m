@@ -66,7 +66,6 @@
     [dataDic setValue:FR_Protocal_Ver forKey:@"pro"];
     [dataDic setValue:FRVersion forKey:@"sv"];
     
-    NSLog(@"init %@",dataDic);
     
     NSData *postData = [NSJSONSerialization dataWithJSONObject:dataDic options:NSJSONWritingPrettyPrinted error:nil];
     [request setHTTPBody:postData];
@@ -131,7 +130,7 @@
     //位置信息
     [dataDic setValue:self.locationDic forKey:@"loc"];
     //http 请求信息
-    
+    [dataDic setValue:[FRNetworkRecord sharedFRNetworkRecord].requestInfo forKey:@"http"];
     //错误的 http 请求信息
     
     //exception 崩溃时的信息
@@ -158,8 +157,7 @@
                 [self.cpuArray removeAllObjects];
                 [self.memoryArray removeAllObjects];
                 //删除采集的http信息
-                
-                
+                [[FRNetworkRecord sharedFRNetworkRecord].requestInfo removeAllObjects];
             }
         }
     }];

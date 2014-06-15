@@ -12,7 +12,7 @@
  */
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
-
+#import "FRDeviceInfo.h"
 #import "NSURLConnection+Swizzling.h"
 //网络记录
 @interface FRNetworkRecord : NSObject <NSURLConnectionDelegate,NSURLConnectionDataDelegate>
@@ -55,6 +55,9 @@
 
 //同步请求的数据
 @property(nonatomic,retain) NSMutableArray *tongbuInfo;
+
+//运营商，网络类型信息
+@property(nonatomic,retain)NSDictionary *carrierDic;
 
 @end
 
