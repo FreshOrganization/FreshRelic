@@ -75,8 +75,10 @@
     
     // 测试 url
     
-//    NSURL *url = [NSURL URLWithString:@"http://pica.nipic.com/2007-12-12/20071212235955316_2.jpg"];
-//    NSData *resultData = [NSData dataWithContentsOfURL:url];
+    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:req delegate:self];
+        [conn start];
+    
 }
 -(void)btnTouch
 {

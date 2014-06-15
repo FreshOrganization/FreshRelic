@@ -26,6 +26,11 @@
 		708AF9AF192DF57600A277F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 708AF991192DF57600A277F5 /* UIKit.framework */; };
 		708AF9B7192DF57600A277F5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 708AF9B5192DF57600A277F5 /* InfoPlist.strings */; };
 		708AF9B9192DF57600A277F5 /* FreshRelicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 708AF9B8192DF57600A277F5 /* FreshRelicTests.m */; };
+		9F7A8610194DA32000257FE8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 708AF98D192DF57600A277F5 /* Foundation.framework */; };
+		9F7A861D194DA32000257FE8 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 708AF9AC192DF57600A277F5 /* XCTest.framework */; };
+		9F7A861E194DA32000257FE8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 708AF98D192DF57600A277F5 /* Foundation.framework */; };
+		9F7A861F194DA32000257FE8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 708AF991192DF57600A277F5 /* UIKit.framework */; };
+		9F7A8622194DA32000257FE8 /* libTestINIOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F7A860F194DA32000257FE8 /* libTestINIOS.a */; };
 		9F9A9D45192E3E170042D76E /* FRAppAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9A9D44192E3E170042D76E /* FRAppAgent.m */; };
 		9F9A9D4A192E47D10042D76E /* FRAgentUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9A9D49192E47D10042D76E /* FRAgentUtils.m */; };
 		9FC8E1861948A1A500E29F04 /* FRMyKeyChainHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FC8E1851948A1A500E29F04 /* FRMyKeyChainHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -42,7 +47,26 @@
 			remoteGlobalIDString = 708AF989192DF57600A277F5;
 			remoteInfo = FreshRelic;
 		};
+		9F7A8620194DA32000257FE8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 708AF982192DF57600A277F5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9F7A860E194DA32000257FE8;
+			remoteInfo = TestINIOS;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9F7A860D194DA32000257FE8 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		185319AF193B77D600ABCEF4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -72,6 +96,8 @@
 		708AF9B4192DF57600A277F5 /* FreshRelicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FreshRelicTests-Info.plist"; sourceTree = "<group>"; };
 		708AF9B6192DF57600A277F5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		708AF9B8192DF57600A277F5 /* FreshRelicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FreshRelicTests.m; sourceTree = "<group>"; };
+		9F7A860F194DA32000257FE8 /* libTestINIOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTestINIOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F7A861C194DA32000257FE8 /* TestINIOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestINIOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F9A9D43192E3E170042D76E /* FRAppAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRAppAgent.h; sourceTree = "<group>"; };
 		9F9A9D44192E3E170042D76E /* FRAppAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRAppAgent.m; sourceTree = "<group>"; };
 		9F9A9D48192E47D10042D76E /* FRAgentUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRAgentUtils.h; sourceTree = "<group>"; };
@@ -109,6 +135,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9F7A860C194DA32000257FE8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F7A8610194DA32000257FE8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F7A8619194DA32000257FE8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F7A861D194DA32000257FE8 /* XCTest.framework in Frameworks */,
+				9F7A861F194DA32000257FE8 /* UIKit.framework in Frameworks */,
+				9F7A8622194DA32000257FE8 /* libTestINIOS.a in Frameworks */,
+				9F7A861E194DA32000257FE8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -127,6 +172,8 @@
 			children = (
 				708AF98A192DF57600A277F5 /* FreshRelic.app */,
 				708AF9AB192DF57600A277F5 /* FreshRelicTests.xctest */,
+				9F7A860F194DA32000257FE8 /* libTestINIOS.a */,
+				9F7A861C194DA32000257FE8 /* TestINIOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -251,6 +298,41 @@
 			productReference = 708AF9AB192DF57600A277F5 /* FreshRelicTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		9F7A860E194DA32000257FE8 /* TestINIOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F7A862F194DA32000257FE8 /* Build configuration list for PBXNativeTarget "TestINIOS" */;
+			buildPhases = (
+				9F7A860B194DA32000257FE8 /* Sources */,
+				9F7A860C194DA32000257FE8 /* Frameworks */,
+				9F7A860D194DA32000257FE8 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TestINIOS;
+			productName = TestINIOS;
+			productReference = 9F7A860F194DA32000257FE8 /* libTestINIOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		9F7A861B194DA32000257FE8 /* TestINIOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F7A8630194DA32000257FE8 /* Build configuration list for PBXNativeTarget "TestINIOSTests" */;
+			buildPhases = (
+				9F7A8618194DA32000257FE8 /* Sources */,
+				9F7A8619194DA32000257FE8 /* Frameworks */,
+				9F7A861A194DA32000257FE8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9F7A8621194DA32000257FE8 /* PBXTargetDependency */,
+			);
+			name = TestINIOSTests;
+			productName = TestINIOSTests;
+			productReference = 9F7A861C194DA32000257FE8 /* TestINIOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -261,6 +343,9 @@
 				ORGANIZATIONNAME = Lijinfeng;
 				TargetAttributes = {
 					708AF9AA192DF57600A277F5 = {
+						TestTargetID = 708AF989192DF57600A277F5;
+					};
+					9F7A861B194DA32000257FE8 = {
 						TestTargetID = 708AF989192DF57600A277F5;
 					};
 				};
@@ -280,6 +365,8 @@
 			targets = (
 				708AF989192DF57600A277F5 /* FreshRelic */,
 				708AF9AA192DF57600A277F5 /* FreshRelicTests */,
+				9F7A860E194DA32000257FE8 /* TestINIOS */,
+				9F7A861B194DA32000257FE8 /* TestINIOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -300,6 +387,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				708AF9B7192DF57600A277F5 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F7A861A194DA32000257FE8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +427,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9F7A860B194DA32000257FE8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F7A8618194DA32000257FE8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -340,6 +448,11 @@
 			isa = PBXTargetDependency;
 			target = 708AF989192DF57600A277F5 /* FreshRelic */;
 			targetProxy = 708AF9B0192DF57600A277F5 /* PBXContainerItemProxy */;
+		};
+		9F7A8621194DA32000257FE8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9F7A860E194DA32000257FE8 /* TestINIOS */;
+			targetProxy = 9F7A8620194DA32000257FE8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -509,6 +622,74 @@
 			};
 			name = Release;
 		};
+		9F7A862B194DA32000257FE8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/TestINIOS.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TestINIOS/TestINIOS-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		9F7A862C194DA32000257FE8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/TestINIOS.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TestINIOS/TestINIOS-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		9F7A862D194DA32000257FE8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FreshRelic.app/FreshRelic";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TestINIOS/TestINIOS-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "TestINIOSTests/TestINIOSTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		9F7A862E194DA32000257FE8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FreshRelic.app/FreshRelic";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TestINIOS/TestINIOS-Prefix.pch";
+				INFOPLIST_FILE = "TestINIOSTests/TestINIOSTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -538,6 +719,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		9F7A862F194DA32000257FE8 /* Build configuration list for PBXNativeTarget "TestINIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F7A862B194DA32000257FE8 /* Debug */,
+				9F7A862C194DA32000257FE8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		9F7A8630194DA32000257FE8 /* Build configuration list for PBXNativeTarget "TestINIOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F7A862D194DA32000257FE8 /* Debug */,
+				9F7A862E194DA32000257FE8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
