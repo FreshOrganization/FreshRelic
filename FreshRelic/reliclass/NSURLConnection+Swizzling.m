@@ -74,23 +74,32 @@
 
 - (id)xxx_initWithRequest:(NSURLRequest *)request delegate:(id < NSURLConnectionDelegate >)delegate
 {
-    [self xxx_initWithRequest:request delegate:delegate];
+    
+    FRNetworkRecord *record = [FRNetworkRecord sharedFRNetworkRecord];
+    
+    
+    
+    [self xxx_initWithRequest:request delegate:record];
+    
     [FRNetworkRecord addConn:self andDelegate:delegate];
     return self;
 }
 
 - (id)xxx_initWithRequest:(NSURLRequest *)request delegate:(id < NSURLConnectionDelegate >)delegate startImmediately:(BOOL)startImmediately
 {
-    [FRNetworkRecord addConn:self andDelegate:delegate];
+    FRNetworkRecord *record = [FRNetworkRecord sharedFRNetworkRecord];
+    
     [self xxx_initWithRequest:request delegate:delegate startImmediately:startImmediately];
 
+    [FRNetworkRecord addConn:self andDelegate:record];
+    
     return self;
 }
 
 + (NSURLConnection *)xxx_connectionWithRequest:(NSURLRequest *)request delegate:(id < NSURLConnectionDelegate >)delegate
 {
-    
-    NSURLConnection *conn = [NSURLConnection xxx_connectionWithRequest:request delegate:delegate];
+    FRNetworkRecord *record = [FRNetworkRecord sharedFRNetworkRecord];
+    NSURLConnection *conn = [NSURLConnection xxx_connectionWithRequest:request delegate:record];
     [FRNetworkRecord addConn:conn andDelegate:delegate];
     return conn;
 }

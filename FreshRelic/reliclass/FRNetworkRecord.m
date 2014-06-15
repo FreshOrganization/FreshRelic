@@ -15,7 +15,7 @@ _Pragma("clang diagnostic pop") \
 #import "FRNetworkRecord.h"
 
 @implementation FRNetworkRecord
-static FRNetworkRecord* sharedInstance = nil;
+
 
 
 +(void)addConn:(NSURLConnection*)conn andDelegate:(id<NSURLConnectionDelegate>)delegate
@@ -33,9 +33,12 @@ static FRNetworkRecord* sharedInstance = nil;
         }
     }
 }
+
+static dispatch_once_t onceToken;
+static FRNetworkRecord* sharedInstance = nil;
 +(FRNetworkRecord*)sharedFRNetworkRecord
 {
-    static dispatch_once_t onceToken;
+    
     dispatch_once(&onceToken, ^{
         sharedInstance = [[FRNetworkRecord alloc] init];
         
@@ -80,7 +83,7 @@ static FRNetworkRecord* sharedInstance = nil;
 
 //        [req setAllHTTPHeaderFields:dict];
         
-        NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:req delegate:nil];
+        NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:req delegate:self];
         [conn start];
 //        [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]
         
