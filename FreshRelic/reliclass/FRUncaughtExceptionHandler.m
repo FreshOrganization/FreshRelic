@@ -3,7 +3,6 @@
 #include <libkern/OSAtomic.h>
 #include <execinfo.h>
 
-//http://www.cocoachina.com/newbie/tutorial/2012/0829/4672.html
 NSString * const UncaughtExceptionHandlerSignalExceptionName = @"UncaughtExceptionHandlerSignalExceptionName";
 NSString * const UncaughtExceptionHandlerSignalKey = @"UncaughtExceptionHandlerSignalKey";
 NSString * const UncaughtExceptionHandlerAddressesKey = @"UncaughtExceptionHandlerAddressesKey";

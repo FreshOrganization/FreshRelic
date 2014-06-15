@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "FRDeviceInfo.h"
+#import "NSData+Swizzling.h"
 
 @interface ViewController ()
 
@@ -70,6 +71,11 @@
     btn.center = self.view.center;
     btn.backgroundColor = [UIColor blueColor];
     [self.view addSubview:btn];
+    
+    // 测试 url
+    
+    NSURL *url = [NSURL URLWithString:@"http://pica.nipic.com/2007-12-12/20071212235955316_2.jpg"];
+    NSData *resultData = [NSData dataWithContentsOfURL:url];
 }
 -(void)btnTouch
 {
