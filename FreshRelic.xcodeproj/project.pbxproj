@@ -31,6 +31,7 @@
 		9FC8E1861948A1A500E29F04 /* FRMyKeyChainHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FC8E1851948A1A500E29F04 /* FRMyKeyChainHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E408CEC2194D3B5D007F579B /* NSURLConnection+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = E408CEC1194D3B5D007F579B /* NSURLConnection+Swizzling.m */; };
 		E408CEC5194D3C6E007F579B /* NSData+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = E408CEC4194D3C6E007F579B /* NSData+Swizzling.m */; };
+		E408CECE194D4B66007F579B /* JRSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = E408CECD194D4B66007F579B /* JRSwizzle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,8 @@
 		E408CEC1194D3B5D007F579B /* NSURLConnection+Swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLConnection+Swizzling.m"; sourceTree = "<group>"; };
 		E408CEC3194D3C6E007F579B /* NSData+Swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Swizzling.h"; sourceTree = "<group>"; };
 		E408CEC4194D3C6E007F579B /* NSData+Swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Swizzling.m"; sourceTree = "<group>"; };
+		E408CECC194D4B66007F579B /* JRSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRSwizzle.h; path = FreshRelic/JRSwizzle/JRSwizzle.h; sourceTree = SOURCE_ROOT; };
+		E408CECD194D4B66007F579B /* JRSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRSwizzle.m; path = FreshRelic/JRSwizzle/JRSwizzle.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +191,8 @@
 		9F9A9CFF192E3CBD0042D76E /* reliclass */ = {
 			isa = PBXGroup;
 			children = (
+				E408CECC194D4B66007F579B /* JRSwizzle.h */,
+				E408CECD194D4B66007F579B /* JRSwizzle.m */,
 				9FC8E1841948A1A500E29F04 /* FRMyKeyChainHelper.h */,
 				9FC8E1851948A1A500E29F04 /* FRMyKeyChainHelper.m */,
 				9F9A9D43192E3E170042D76E /* FRAppAgent.h */,
@@ -315,6 +320,7 @@
 				708AF99A192DF57600A277F5 /* main.m in Sources */,
 				702F028F1935DDE3007273B6 /* FRDeviceInfo.m in Sources */,
 				9FC8E1861948A1A500E29F04 /* FRMyKeyChainHelper.m in Sources */,
+				E408CECE194D4B66007F579B /* JRSwizzle.m in Sources */,
 				9F9A9D45192E3E170042D76E /* FRAppAgent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
