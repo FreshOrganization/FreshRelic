@@ -6,6 +6,10 @@
 //  Copyright (c) 2014 Lijinfeng. All rights reserved.
 //
 
+/*
+ eht error 
+ nht ok
+ */
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 
@@ -41,10 +45,22 @@
 //故障的时候线程的堆栈
 @property (nonatomic,retain) NSMutableArray *threadCallStacks;
 
-//采集http数据
-@property(nonatomic,retain)NSMutableDictionary *httpReportDataDic;
+//完成状态
+@property (nonatomic,retain) NSMutableArray *finishStatus;
+
+//采集的nht/eht数据
+@property(nonatomic,retain) NSMutableArray *requestInfo;
+
 
 @end
+
+
+/*
+ 
+  "sd":           // Int，默认0，send_size，发送内容大小
+ 
+  "rd":           // Int，默认0，receive_size，响应内容字节数：排除响应头内容和字节数
+ */
 /*
  1.url  直接通过connection获得request，再获得url    搞定
  2.相应时间   记录开始时间和响应时间就可以了           搞定

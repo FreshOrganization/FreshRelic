@@ -56,6 +56,8 @@ static FRNetworkRecord* sharedInstance = nil;
         self.dataArray = [[NSMutableArray alloc] init];
         self.responseArray = [[NSMutableArray alloc] init];
         self.threadCallStacks = [[NSMutableArray alloc] init];
+        self.finishStatus = [[NSMutableArray alloc] init];
+        
         
         
         /*
@@ -73,7 +75,12 @@ static FRNetworkRecord* sharedInstance = nil;
         method_exchangeImplementations(m1, m2);
         */
         
-        NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]] delegate:nil];
+        NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
+//        NSDictionary *dict = @{@"aa": @"1"};
+
+//        [req setAllHTTPHeaderFields:dict];
+        
+        NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:req delegate:nil];
         [conn start];
 //        [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]
         
@@ -105,24 +112,43 @@ static FRNetworkRecord* sharedInstance = nil;
 
 
 
+-(NSInteger)currentConnIndex:(NSURLConnection*)connection
+{
+    return [_connArray indexOfObject:connection];
+}
+
 
 #pragma mark - NSURLConnectionDelegate
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     [_threadCallStacks addObject:[NSThread callStackSymbols]];
+    
+    
+    NSMutableDictionary *dict = _requestInfo[[self currentConnIndex:connection]];
+    [dict setValue:[NSNumber numberWithBool:NO] forKey:@"isFinish"];
+    
     NSInteger errorCode = error.code;
     switch (errorCode) {
         case NSURLErrorTimedOut:
         {
 //        超时
+            [dict setValue:@"3" forKey:@"nte"];
         }
             break;
             case NSURLErrorNetworkConnectionLost:
         {
 //            链接超时
+            [dict setValue:@"2" forKey:@"nte"];
         }
+            break;
+            case NSURLErrorDNSLookupFailed:
+        {
+//        DNS无法解析
+            [dict setValue:@"1" forKey:@"nte"];
             
+            
+        }break;
         default:
             break;
     }
@@ -215,6 +241,21 @@ static FRNetworkRecord* sharedInstance = nil;
 {
     [_startTimeArray addObject:[NSDate date]];
     
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    [dict setValue:request.URL forKey:@"url"];
+    
+    
+    NSMutableDictionary *pas = [NSMutableDictionary dictionary];
+    [pas setValuesForKeysWithDictionary:[request allHTTPHeaderFields]];
+    [dict setValue:dict forKey:@"pas"];
+    
+//    NSData *data = [[NSData alloc] initwith]
+//    [dict setValue:<#(id)#> forKey:<#(NSString *)#>]
+    
+
+    
+    
+    
     id<NSURLConnectionDataDelegate> obj = [self getDelegateFormConnection:connection];
     SEL sel = _cmd;
     NSURLRequest *req = request;
@@ -227,12 +268,38 @@ static FRNetworkRecord* sharedInstance = nil;
 }
 
 
+
+
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     [_responseTimeArray addObject:[NSDate date]];
     [_dataArray addObject:[NSMutableData data]];
-//    NSInteger statusCode = [(NSHTTPURLResponse*)response statusCode];
-//    NSLog(@"%@",[NSHTTPURLResponse localizedStringForStatusCode:statusCode]);
+    
+    NSTimeInterval currentTime = [[NSDate date] timeIntervalSince1970];
+    NSDate *startDate = _startTimeArray[[_connArray indexOfObject:connection]];
+    NSTimeInterval startTime = [startDate timeIntervalSince1970];
+    
+    NSMutableDictionary *dict = _requestInfo[[self currentConnIndex:connection]];
+    NSString *responseTime = [NSString stringWithFormat:@"%f",currentTime-startTime];
+    [dict setValue:responseTime forKey:@"fpt"];
+    
+    if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+        NSInteger statusCode = [(NSHTTPURLResponse*)response statusCode];
+        // String，HTTP状态码，如400
+        [dict setValue:[NSString stringWithFormat:@"%d",statusCode] forKey:@"htp"];
+//          "bd":          //String，body，响应body内容
+        [dict setValue:[(NSHTTPURLResponse*)response allHeaderFields] forKey:@"bd"];
+        
+        
+//            "et":           // String，错误时的堆栈信息，exception_trace
+        [dict setValue:[NSThread callStackSymbols] forKey:@"et"];
+        
+        //    NSLog(@"%@",[NSHTTPURLResponse localizedStringForStatusCode:statusCode]);
+    }
+    
+    
+    
+
     [_responseTimeArray addObject:response];
     NSObject *obj = [self getDelegateFormConnection:connection];
     SEL sel = _cmd;
@@ -310,6 +377,26 @@ totalBytesExpectedToWrite:totalBytesExpectedToWrite];
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     [_endTimeArray addObject:[NSDate date]];
+    
+    
+    
+    NSTimeInterval currentTime = [[NSDate date] timeIntervalSince1970];
+    NSDate *startDate = _startTimeArray[[_connArray indexOfObject:connection]];
+    NSTimeInterval startTime = [startDate timeIntervalSince1970];
+    
+    NSMutableDictionary *dict = _requestInfo[[self currentConnIndex:connection]];
+    NSString *responseTime = [NSString stringWithFormat:@"%f",currentTime-startTime];
+    [dict setValue:responseTime forKey:@"ret"];
+    
+    
+    NSData *data = _dataArray[[_connArray indexOfObject:connection]];
+    [dict setValue:[data bytes] forKey:@"rd"];
+    
+    [dict setValue:[NSString stringWithFormat:@"%f",currentTime] forKey:@"tm"];
+    
+    
+    [dict setValue:[NSNumber numberWithBool:YES] forKey:@"isFinish"];
+    
     NSObject *obj = [self getDelegateFormConnection:connection];
     SEL sel = _cmd;
     if ([obj respondsToSelector:sel]) {
