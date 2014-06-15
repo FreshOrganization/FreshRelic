@@ -186,7 +186,7 @@ __strong static FRNetworkRecord* sharedInstance = nil;
 {
     
 //    SEL sel = NSSelectorFromString(NSStringFromSelector(_cmd));
-    return YES;
+
     SEL sel = _cmd;
     NSInteger index = [_connArray indexOfObject:connection];
     id obj = _delegateArray[index];
