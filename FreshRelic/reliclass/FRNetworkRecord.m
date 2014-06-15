@@ -54,6 +54,12 @@ _Pragma("clang diagnostic pop") \
     return conn;
 }
 
+
++(void)newSendSynchronousRequest:(NSURLRequest *)request queue:(NSOperationQueue *)queue completionHandler:(void (^)(NSURLResponse*, NSData*, NSError*))handler
+{
+    
+}
+
 @end
 @implementation FRNetworkRecord
 static FRNetworkRecord* sharedInstance = nil;
@@ -63,8 +69,7 @@ static FRNetworkRecord* sharedInstance = nil;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[FRNetworkRecord alloc] init];
         
-//        SEL sel = _cmd;
-//        NSLog(@"%@",NSStringFromSelector(sel));
+
     });
     return sharedInstance;
 }
@@ -91,6 +96,13 @@ static FRNetworkRecord* sharedInstance = nil;
         method_exchangeImplementations(m1, m2);
         
         
+        m1 = class_getClassMethod([NSURLConnection class], @selector(sendSynchronousRequest:queue:completionHandler:));
+        
+        m2 = class_getClassMethod([Conn class], @selector(newSendSynchronousRequest:queue:completionHandler:));
+        
+        method_exchangeImplementations(m1, m2);
+        
+        
         
         
 //        NSLog(@"%@",obj);
@@ -113,6 +125,10 @@ static FRNetworkRecord* sharedInstance = nil;
     }
     return obj;
 }
+
+
+
+
 #pragma mark - NSURLConnectionDelegate
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
