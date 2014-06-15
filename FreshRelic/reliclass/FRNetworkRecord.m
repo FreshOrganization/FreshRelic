@@ -58,6 +58,7 @@ __strong static FRNetworkRecord* sharedInstance = nil;
     self.threadCallStacks = [[NSMutableArray alloc] init];
     self.finishStatus = [[NSMutableArray alloc] init];
     self.requestInfo = [[NSMutableArray alloc] init];
+    self.tongbuInfo = [[NSMutableArray alloc] init];
 }
 
 //- (instancetype)init

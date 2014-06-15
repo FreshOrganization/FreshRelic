@@ -138,18 +138,53 @@
 
 + (NSData *)xxx_sendSynchronousRequest:(NSURLRequest *)request returningResponse:(NSURLResponse **)response error:(NSError **)error
 {
-
+    NSTimeInterval startTime = [self getCurrentTimeInterval];
     NSData *data = [self xxx_sendSynchronousRequest:request returningResponse:response error:error];
+    
+    NSTimeInterval endTime = [self getCurrentTimeInterval];
+    
+    FRNetworkRecord *record = [FRNetworkRecord sharedFRNetworkRecord];
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setValue:request.URL forKey:@"url"];
+    [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"ret"];
+    [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"fpt"];
+    [dict setValue:[NSString stringWithFormat:@"%d",[data length]] forKey:@"rd"];
+    [dict setValue:[NSString stringWithFormat:@"%f",endTime] forKey:@"tm"];
+    
+    
+    [record.tongbuInfo addObject:dict];
     
     return data;
 }
 
-
++(NSTimeInterval)getCurrentTimeInterval
+{
+    NSDate *date = [NSDate date];
+    return [date timeIntervalSince1970];
+}
 + (void)xxx_sendAsynchronousRequest:(NSURLRequest *)request queue:(NSOperationQueue *)queue completionHandler:(void (^)(NSURLResponse*, NSData*, NSError*))handler
 {
+    NSTimeInterval startTime = [self getCurrentTimeInterval];
     [self xxx_sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         handler(response,data,connectionError);
+        
+        NSTimeInterval endTime = [self getCurrentTimeInterval];
+        
+        FRNetworkRecord *record = [FRNetworkRecord sharedFRNetworkRecord];
+        
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        [dict setValue:request.URL forKey:@"url"];
+        [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"ret"];
+        [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"fpt"];
+        [dict setValue:[NSString stringWithFormat:@"%d",[data length]] forKey:@"rd"];
+        [dict setValue:[NSString stringWithFormat:@"%f",endTime] forKey:@"tm"];
+        
+        
+        [record.tongbuInfo addObject:dict];
     }];
+    
+    
 }
 
 

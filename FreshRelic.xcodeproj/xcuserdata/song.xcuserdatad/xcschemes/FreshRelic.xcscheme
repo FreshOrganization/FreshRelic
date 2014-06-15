@@ -38,6 +38,16 @@
                ReferencedContainer = "container:FreshRelic.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9F7A861B194DA32000257FE8"
+               BuildableName = "TestINIOSTests.xctest"
+               BlueprintName = "TestINIOSTests"
+               ReferencedContainer = "container:FreshRelic.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

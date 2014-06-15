@@ -74,10 +74,11 @@
     [self.view addSubview:btn];
     
     // 测试 url
-    
+    /*
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
     NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:req delegate:self];
         [conn start];
+     */
     
 }
 -(void)btnTouch

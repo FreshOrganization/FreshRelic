@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "FRNetworkRecord.h"
 @interface NSData (Swizzling)
 
 @end

@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>TestINIOS.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -18,6 +23,16 @@
 			<true/>
 		</dict>
 		<key>708AF9AA192DF57600A277F5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9F7A860E194DA32000257FE8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9F7A861B194DA32000257FE8</key>
 		<dict>
 			<key>primary</key>
 			<true/>

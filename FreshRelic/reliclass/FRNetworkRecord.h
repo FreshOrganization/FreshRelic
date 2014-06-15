@@ -50,9 +50,11 @@
 //完成状态
 @property (nonatomic,retain) NSMutableArray *finishStatus;
 
-//采集的nht/eht数据
+//采集的nht/eht数据   异步请求的数据
 @property(nonatomic,retain) NSMutableArray *requestInfo;
 
+//同步请求的数据
+@property(nonatomic,retain) NSMutableArray *tongbuInfo;
 
 @end
 
