@@ -12,9 +12,10 @@
 
 + (void)load
 {
+    NSLog(@"nsdata swizzling is coming...");
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        [self jr_swizzleClassMethod:@selector(dataWithContentsOfURL:) withClassMethod:@selector(dataWithContentsOfURL:) error:nil];
+        [self jr_swizzleClassMethod:@selector(dataWithContentsOfURL:) withClassMethod:@selector(xxx_dataWithContentsOfURL:) error:nil];
         
         
         [self jr_swizzleClassMethod:@selector(dataWithContentsOfURL:options:error:) withClassMethod:@selector(xxx_dataWithContentsOfURL:options:error:) error:nil];
