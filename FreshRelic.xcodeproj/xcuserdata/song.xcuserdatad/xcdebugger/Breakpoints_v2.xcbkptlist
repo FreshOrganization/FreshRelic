@@ -30,7 +30,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FreshRelic/reliclass/FRNetworkRecord.m"
-            timestampString = "424513082.080383"
+            timestampString = "424514250.609077"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "382"
@@ -46,23 +46,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FreshRelic/reliclass/FRNetworkRecord.m"
-            timestampString = "424513082.080383"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "-init"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FreshRelic/reliclass/FRNetworkRecord.m"
-            timestampString = "424513082.080383"
+            timestampString = "424514250.609077"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "245"
@@ -78,44 +62,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FreshRelic/reliclass/NSURLConnection+Swizzling.m"
-            timestampString = "424512189.21496"
+            timestampString = "424514099.066264"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "-xxx_initWithRequest:delegate:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FreshRelic/reliclass/NSURLConnection+Swizzling.m"
-            timestampString = "424512259.906345"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "-xxx_initWithRequest:delegate:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FreshRelic/reliclass/FRNetworkRecord.m"
-            timestampString = "424513079.49703"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "+sharedFRNetworkRecord"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

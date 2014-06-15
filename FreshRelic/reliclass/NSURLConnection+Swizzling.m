@@ -42,6 +42,7 @@
 
 + (void)load
 {
+    [super load];
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         
@@ -76,7 +77,6 @@
 {
     
     FRNetworkRecord *record = [FRNetworkRecord sharedFRNetworkRecord];
-    
     
     
     [self xxx_initWithRequest:request delegate:record];

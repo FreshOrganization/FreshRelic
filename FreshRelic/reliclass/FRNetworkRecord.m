@@ -34,10 +34,10 @@ _Pragma("clang diagnostic pop") \
     }
 }
 
-static dispatch_once_t onceToken;
-static FRNetworkRecord* sharedInstance = nil;
+__strong static FRNetworkRecord* sharedInstance = nil;
 +(FRNetworkRecord*)sharedFRNetworkRecord
 {
+    static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{
         sharedInstance = [[FRNetworkRecord alloc] init];
