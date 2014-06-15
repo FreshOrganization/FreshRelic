@@ -86,6 +86,7 @@
     }
 
     [FRNetworkRecord sharedFRNetworkRecord];
+    [[FRNetworkRecord sharedFRNetworkRecord] initRecord];
     
     // 异常捕获注册
     InstallUncaughtExceptionHandler();

@@ -34,66 +34,112 @@ _Pragma("clang diagnostic pop") \
     }
 }
 
-static dispatch_once_t onceToken;
-static FRNetworkRecord* sharedInstance = nil;
+//static dispatch_once_t onceToken;
+//static FRNetworkRecord* sharedInstance = nil;
 +(FRNetworkRecord*)sharedFRNetworkRecord
 {
-    
-    dispatch_once(&onceToken, ^{
-        sharedInstance = [[FRNetworkRecord alloc] init];
-        
-
-    });
-    return sharedInstance;
-}
-
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        self.connArray = [[NSMutableArray alloc] init];
-        self.delegateArray = [[NSMutableArray alloc] init];
-        self.startTimeArray = [[NSMutableArray alloc] init];
-        self.responseTimeArray = [[NSMutableArray alloc] init];
-        self.endTimeArray = [[NSMutableArray alloc] init];
-        self.dataArray = [[NSMutableArray alloc] init];
-        self.responseArray = [[NSMutableArray alloc] init];
-        self.threadCallStacks = [[NSMutableArray alloc] init];
-        self.finishStatus = [[NSMutableArray alloc] init];
-        
-        
-        
-        /*
-        Method m1 = class_getInstanceMethod([NSURLConnection class], @selector(initWithRequest:delegate:));
-        
-        Method m2 = class_getInstanceMethod([Conn class], @selector(newInitWithRequest:delegate:));
-        
-        method_exchangeImplementations(m1, m2);
-        
-        
-        m1 = class_getClassMethod([NSURLConnection class], @selector(sendSynchronousRequest:queue:completionHandler:));
-        
-        m2 = class_getClassMethod([Conn class], @selector(newSendSynchronousRequest:queue:completionHandler:));
-        
-        method_exchangeImplementations(m1, m2);
-        */
-        
-        NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
-//        NSDictionary *dict = @{@"aa": @"1"};
-
-//        [req setAllHTTPHeaderFields:dict];
-        
-        NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:req delegate:self];
-        [conn start];
-//        [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]
-        
-//        NSData *data = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]] returningResponse:nil error:nil];
-//        NSLog(@"%@",data);
-        
-
+    static FRNetworkRecord *frRecord;
+    @synchronized(self) {
+        if (!frRecord)
+            frRecord = [[self alloc] init];
     }
-    return self;
+    return frRecord;
+    
+//    dispatch_once(&onceToken, ^{
+//        sharedInstance = [[FRNetworkRecord alloc] init];
+//    });
+//    NSLog(@"dfd");
+//    return sharedInstance;
 }
+
+-(void)initRecord{
+    self.connArray = [[NSMutableArray alloc] init];
+    self.delegateArray = [[NSMutableArray alloc] init];
+    self.startTimeArray = [[NSMutableArray alloc] init];
+    self.responseTimeArray = [[NSMutableArray alloc] init];
+    self.endTimeArray = [[NSMutableArray alloc] init];
+    self.dataArray = [[NSMutableArray alloc] init];
+    self.responseArray = [[NSMutableArray alloc] init];
+    self.threadCallStacks = [[NSMutableArray alloc] init];
+    self.finishStatus = [[NSMutableArray alloc] init];
+    
+    
+    
+    /*
+     Method m1 = class_getInstanceMethod([NSURLConnection class], @selector(initWithRequest:delegate:));
+     
+     Method m2 = class_getInstanceMethod([Conn class], @selector(newInitWithRequest:delegate:));
+     
+     method_exchangeImplementations(m1, m2);
+     
+     
+     m1 = class_getClassMethod([NSURLConnection class], @selector(sendSynchronousRequest:queue:completionHandler:));
+     
+     m2 = class_getClassMethod([Conn class], @selector(newSendSynchronousRequest:queue:completionHandler:));
+     
+     method_exchangeImplementations(m1, m2);
+     */
+    
+    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
+    //        NSDictionary *dict = @{@"aa": @"1"};
+    
+    //        [req setAllHTTPHeaderFields:dict];
+    
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:req delegate:self];
+    [conn start];
+    //        [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]
+    
+    //        NSData *data = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]] returningResponse:nil error:nil];
+    //        NSLog(@"%@",data);
+}
+
+//- (instancetype)init
+//{
+//    self = [super init];
+//    if (self) {
+//        self.connArray = [[NSMutableArray alloc] init];
+//        self.delegateArray = [[NSMutableArray alloc] init];
+//        self.startTimeArray = [[NSMutableArray alloc] init];
+//        self.responseTimeArray = [[NSMutableArray alloc] init];
+//        self.endTimeArray = [[NSMutableArray alloc] init];
+//        self.dataArray = [[NSMutableArray alloc] init];
+//        self.responseArray = [[NSMutableArray alloc] init];
+//        self.threadCallStacks = [[NSMutableArray alloc] init];
+//        self.finishStatus = [[NSMutableArray alloc] init];
+//        
+//        
+//        
+//        /*
+//        Method m1 = class_getInstanceMethod([NSURLConnection class], @selector(initWithRequest:delegate:));
+//        
+//        Method m2 = class_getInstanceMethod([Conn class], @selector(newInitWithRequest:delegate:));
+//        
+//        method_exchangeImplementations(m1, m2);
+//        
+//        
+//        m1 = class_getClassMethod([NSURLConnection class], @selector(sendSynchronousRequest:queue:completionHandler:));
+//        
+//        m2 = class_getClassMethod([Conn class], @selector(newSendSynchronousRequest:queue:completionHandler:));
+//        
+//        method_exchangeImplementations(m1, m2);
+//        */
+//        
+//        NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
+////        NSDictionary *dict = @{@"aa": @"1"};
+//
+////        [req setAllHTTPHeaderFields:dict];
+//        
+//        NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:req delegate:self];
+//        [conn start];
+////        [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]
+//        
+////        NSData *data = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]] returningResponse:nil error:nil];
+////        NSLog(@"%@",data);
+//        
+//
+//    }
+//    return self;
+//}
 
 -(void)returnNo
 {

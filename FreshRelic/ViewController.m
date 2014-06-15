@@ -53,10 +53,10 @@
     
 //    NSLog(@"%@",[NSString stringWithUTF8String:__FILE__] );
 //    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]] delegate:self];
-    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
-    [req setTimeoutInterval:10];
-    NSURLConnection *conn = [NSURLConnection connectionWithRequest:req delegate:self];
-    [conn start];
+//    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
+//    [req setTimeoutInterval:10];
+//    NSURLConnection *conn = [NSURLConnection connectionWithRequest:req delegate:self];
+//    [conn start];
 //    NSLog(@"%@",[NSThread callStackReturnAddresses]);
     
 //    [deviceinfo getAddressDictonarytest];
@@ -74,8 +74,8 @@
     
     // 测试 url
     
-    NSURL *url = [NSURL URLWithString:@"http://pica.nipic.com/2007-12-12/20071212235955316_2.jpg"];
-    NSData *resultData = [NSData dataWithContentsOfURL:url];
+//    NSURL *url = [NSURL URLWithString:@"http://pica.nipic.com/2007-12-12/20071212235955316_2.jpg"];
+//    NSData *resultData = [NSData dataWithContentsOfURL:url];
 }
 -(void)btnTouch
 {
