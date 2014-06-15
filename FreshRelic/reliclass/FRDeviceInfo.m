@@ -12,6 +12,7 @@
 #import <sys/sysctl.h>
 #import <mach/mach.h>
 #import "FRMyKeyChainHelper.h"
+#import "Reachability.h"
 
 @implementation FRDeviceInfo
 
@@ -130,7 +131,13 @@
     CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
     NSLog(@"network %@",networkInfo.currentRadioAccessTechnology);//7.0
     NSLog(@"net %@",networkInfo.subscriberCellularProvider.carrierName);
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:networkInfo.currentRadioAccessTechnology,@"technology",networkInfo.subscriberCellularProvider.carrierName,@"carriername", nil];
+    NSString *net_type;
+    if ([[Reachability reachabilityForLocalWiFi]currentReachabilityStatus]!=NotReachable ) {
+        net_type = @"1";//
+    }else{
+        net_type = @"0";
+    }
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@/%@",net_type,networkInfo.currentRadioAccessTechnology],@"nt",networkInfo.subscriberCellularProvider.carrierName,@"isp", nil];
     return dic;
 }
 

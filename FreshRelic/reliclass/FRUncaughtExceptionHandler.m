@@ -3,6 +3,8 @@
 #include <libkern/OSAtomic.h>
 #include <execinfo.h>
 
+#import "FRReportDataUnit.h"
+
 NSString * const UncaughtExceptionHandlerSignalExceptionName = @"UncaughtExceptionHandlerSignalExceptionName";
 NSString * const UncaughtExceptionHandlerSignalKey = @"UncaughtExceptionHandlerSignalKey";
 NSString * const UncaughtExceptionHandlerAddressesKey = @"UncaughtExceptionHandlerAddressesKey";
@@ -116,14 +118,15 @@ void HandleException(NSException *exception)
      setObject:callStack
      forKey:UncaughtExceptionHandlerAddressesKey];
     
-    [[[FRUncaughtExceptionHandler alloc] init]
-     performSelectorOnMainThread:@selector(handleException:)
-     withObject:
-     [NSException
-      exceptionWithName:[exception name]
-      reason:[exception reason]
-      userInfo:userInfo]
-     waitUntilDone:YES];
+//    [[[FRUncaughtExceptionHandler alloc] init]
+//     performSelectorOnMainThread:@selector(handleException:)
+//     withObject:
+//     [NSException
+//      exceptionWithName:[exception name]
+//      reason:[exception reason]
+//      userInfo:userInfo]
+//     waitUntilDone:YES];
+    [[FRReportDataUnit shareStance] performSelectorOnMainThread:@selector(reportException:) withObject:[NSException exceptionWithName:[exception name] reason:[exception reason] userInfo:userInfo] waitUntilDone:YES];
 }
 
 void SignalHandler(int signal)
