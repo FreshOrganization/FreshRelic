@@ -74,11 +74,10 @@
             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
             if ([[dic objectForKey:@"en"] intValue]==0 ) {
                 //初始化成功,开始监听
-                [self startMonitor];
+//                [self performSelectorOnMainThread:@selector(startMonitor) withObject:nil waitUntilDone:NO];
             }
         }
     }];
-    //临时执行
     [self startMonitor];
 }
 
@@ -94,7 +93,7 @@
     // 异常捕获注册
     InstallUncaughtExceptionHandler();
     
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(reportDataTimer) userInfo:nil repeats:YES];
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(reportDataTimer) userInfo:nil repeats:YES];
     [timer fire];
     
     //采集cpu和内存使用率
@@ -128,8 +127,15 @@
     //位置信息
     [dataDic setValue:self.locationDic forKey:@"loc"];
     //http 请求信息
-    [dataDic setValue:[FRNetworkRecord sharedFRNetworkRecord].requestInfo forKey:@"http"];
+    [dataDic setValue:[FRNetworkRecord sharedFRNetworkRecord].errorInfo forKeyPath:@"eht"];
+    
     //错误的 http 请求信息
+    [dataDic setValue:[FRNetworkRecord sharedFRNetworkRecord].finishInfo forKeyPath:@"nht"];
+    
+    NSLog(@"request %@",[FRNetworkRecord sharedFRNetworkRecord].requestInfo);
+    NSLog(@"finish %@",[FRNetworkRecord sharedFRNetworkRecord].finishInfo);
+    NSLog(@"error %@",[FRNetworkRecord sharedFRNetworkRecord].errorInfo);
+    
     
     //exception 崩溃时的信息
     if (isCrash) {
@@ -141,7 +147,7 @@
         [mutableDic setValue:timeStr forKey:@"tm"];
         [dataDic setValue:mutableDic forKey:@"ecp"];
     }
-    NSLog(@"report %@",dataDic);
+//    NSLog(@"report %@",dataDic);
     
     NSData *postData = [NSJSONSerialization dataWithJSONObject:dataDic options:NSJSONWritingPrettyPrinted error:nil];
     [request setHTTPBody:postData];
@@ -155,7 +161,8 @@
                 [self.cpuArray removeAllObjects];
                 [self.memoryArray removeAllObjects];
                 //删除采集的http信息
-                [[FRNetworkRecord sharedFRNetworkRecord].requestInfo removeAllObjects];
+                [[FRNetworkRecord sharedFRNetworkRecord].finishInfo removeAllObjects];
+                [[FRNetworkRecord sharedFRNetworkRecord].errorInfo removeAllObjects];
             }
         }
     }];

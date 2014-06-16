@@ -50,16 +50,14 @@
     [self xxx_start];
     FRNetworkRecord *record = [FRNetworkRecord sharedFRNetworkRecord];
     [record.startTimeArray addObject:[NSDate date]];
-    
+    NSString *urlStr = [NSString stringWithFormat:@"%@",self.originalRequest.URL];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:record.carrierDic];
-    [dict setValue:[NSString stringWithFormat:@"%@",self.originalRequest.URL] forKey:@"url"];
+    [dict setValue:urlStr forKey:@"url"];
     
     
     NSMutableDictionary *pas = [NSMutableDictionary dictionary];
     [pas setValuesForKeysWithDictionary:[self.originalRequest allHTTPHeaderFields]];
     [dict setValue:pas forKey:@"pas"];
-    
-    
     [record.requestInfo addObject:dict];
 }
 
@@ -79,23 +77,18 @@
 {
     
     FRNetworkRecord *record = [FRNetworkRecord sharedFRNetworkRecord];
-    
     [self xxx_initWithRequest:request delegate:record startImmediately:startImmediately];
-
     [FRNetworkRecord addConn:self andDelegate:delegate];
-
     [record.startTimeArray addObject:[NSDate date]];
-    
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:record.carrierDic];
-    [dict setValue:[NSString stringWithFormat:@"%@",self.originalRequest.URL] forKey:@"url"];
-    
-    
-    NSMutableDictionary *pas = [NSMutableDictionary dictionary];
-    [pas setValuesForKeysWithDictionary:[self.originalRequest allHTTPHeaderFields]];
-    [dict setValue:pas forKey:@"pas"];
-    
-    
-    [record.requestInfo addObject:dict];
+    NSString *urlStr = [NSString stringWithFormat:@"%@",self.originalRequest.URL];
+    if ([urlStr rangeOfString:locationHttp].location==NSNotFound) {
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:record.carrierDic];
+        [dict setValue:[NSString stringWithFormat:@"%@",self.originalRequest.URL] forKey:@"url"];
+        NSMutableDictionary *pas = [NSMutableDictionary dictionary];
+        [pas setValuesForKeysWithDictionary:[self.originalRequest allHTTPHeaderFields]];
+        [dict setValue:pas forKey:@"pas"];
+        [record.requestInfo addObject:dict];
+    }
     return self;
 }
 
@@ -155,7 +148,7 @@
 //        }
         
     }
-    [record.tongbuInfo addObject:dict];
+    [record.finishInfo addObject:dict];
     
     
     return data;
@@ -172,8 +165,11 @@
     [self xxx_sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         handler(response,data,connectionError);
         
+        NSString *urlStr = [NSString stringWithFormat:@"%@",request.URL];
+        if ([urlStr rangeOfString:FreshRelicHttp].location!=NSNotFound) {
+            return;
+        }
         NSTimeInterval endTime = [self getCurrentTimeInterval];
-        
         FRNetworkRecord *record = [FRNetworkRecord sharedFRNetworkRecord];
         NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:record.carrierDic];
         [dict setValue:[NSString stringWithFormat:@"%@",request.URL] forKey:@"url"];
@@ -188,6 +184,7 @@
             [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"ret"];
             [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"fpt"];
             [dict setValue:[NSString stringWithFormat:@"%d",[data length]] forKey:@"rd"];
+            [record.finishInfo addObject:dict];
             
         }else{//错误http
             [dict setValue:[NSNumber numberWithBool:YES] forKey:@"isError"];
@@ -213,12 +210,9 @@
                 default:
                     break;
             }
-
+            [record.errorInfo addObject:dict];
         }
-        [record.tongbuInfo addObject:dict];
     }];
-    
-    
 }
 
 

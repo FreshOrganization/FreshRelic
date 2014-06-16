@@ -34,20 +34,23 @@
     
     NSData *data = [self xxx_dataWithContentsOfURL:aURL];
     
-    NSTimeInterval endTime = [self getCurrentTimeInterval];
+    NSString *urlStr = [NSString stringWithFormat:@"%@",aURL];
+    if ([urlStr rangeOfString:fileHttp].location==NSNotFound) {
+        NSTimeInterval endTime = [self getCurrentTimeInterval];
+        
+        FRNetworkRecord *record = [FRNetworkRecord sharedFRNetworkRecord];
+        
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:record.carrierDic];
+        [dict setValue:[NSString stringWithFormat:@"%@",aURL] forKey:@"url"];
+        [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"ret"];
+        [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"fpt"];
+        [dict setValue:[NSString stringWithFormat:@"%d",[data length]] forKey:@"rd"];
+        [dict setValue:[NSString stringWithFormat:@"%f",endTime] forKey:@"tm"];
     
-    FRNetworkRecord *record = [FRNetworkRecord sharedFRNetworkRecord];
-    
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:record.carrierDic];
-    [dict setValue:[NSNumber numberWithBool:NO] forKey:@"isError"];
-    [dict setValue:[NSString stringWithFormat:@"%@",aURL] forKey:@"url"];
-    [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"ret"];
-    [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"fpt"];
-    [dict setValue:[NSString stringWithFormat:@"%d",[data length]] forKey:@"rd"];
-    [dict setValue:[NSString stringWithFormat:@"%f",endTime] forKey:@"tm"];
+        [record.finishInfo addObject:dict];
 
+    }
     
-    [record.tongbuInfo addObject:dict];
     return data;
 }
 
@@ -55,21 +58,20 @@
 {
     NSTimeInterval startTime = [self getCurrentTimeInterval];
     NSData *data = [self xxx_dataWithContentsOfURL:aURL options:mask error:errorPtr];
-    NSTimeInterval endTime = [self getCurrentTimeInterval];
-    
-    FRNetworkRecord *record = [FRNetworkRecord sharedFRNetworkRecord];
-    
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:record.carrierDic];
-    [dict setValue:[NSNumber numberWithBool:NO] forKey:@"isError"];
-    [dict setValue:[NSString stringWithFormat:@"%@",aURL] forKey:@"url"];
-    [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"ret"];
-    [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"fpt"];
-    [dict setValue:[NSString stringWithFormat:@"%d",[data length]] forKey:@"rd"];
-    [dict setValue:[NSString stringWithFormat:@"%f",endTime] forKey:@"tm"];
-    
-    
-    [record.tongbuInfo addObject:dict];
-    
+    NSString *urlStr = [NSString stringWithFormat:@"%@",aURL];
+    if ([urlStr rangeOfString:fileHttp].location==NSNotFound) {
+        NSTimeInterval endTime = [self getCurrentTimeInterval];
+        FRNetworkRecord *record = [FRNetworkRecord sharedFRNetworkRecord];
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:record.carrierDic];
+        [dict setValue:[NSString stringWithFormat:@"%@",aURL] forKey:@"url"];
+        [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"ret"];
+        [dict setValue:[NSString stringWithFormat:@"%f",endTime-startTime] forKey:@"fpt"];
+        [dict setValue:[NSString stringWithFormat:@"%d",[data length]] forKey:@"rd"];
+        [dict setValue:[NSString stringWithFormat:@"%f",endTime] forKey:@"tm"];
+        
+        
+        [record.finishInfo addObject:dict];
+    }
     return data;
 }
 @end

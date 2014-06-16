@@ -14,6 +14,10 @@
 #define FRInitURL @"http://apm-collector.testin.cn/mobile/v1/data/npi/register"
 #define FRUploadURL @"http://apm-collector.testin.cn/mobile/v1/data/npi/submit"
 
+#define locationHttp   @"gsp4-cn.ls.apple.com"
+#define FreshRelicHttp @"apm-collector.testin.cn"
+#define fileHttp @"file://"
+
 @interface FRDeviceInfo : NSObject
 
 -(NSString *)getDeviceUUID;

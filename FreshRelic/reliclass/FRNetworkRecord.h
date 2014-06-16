@@ -53,8 +53,8 @@
 //采集的nht/eht数据   异步请求的数据
 @property(nonatomic,retain) NSMutableArray *requestInfo;
 
-//同步请求的数据
-@property(nonatomic,retain) NSMutableArray *tongbuInfo;
+@property(nonatomic,retain)NSMutableArray *finishInfo;
+@property(nonatomic,retain)NSMutableArray *errorInfo;
 
 //运营商，网络类型信息
 @property(nonatomic,retain)NSDictionary *carrierDic;

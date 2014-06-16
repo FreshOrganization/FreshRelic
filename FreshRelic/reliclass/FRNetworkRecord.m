@@ -58,9 +58,9 @@ __strong static FRNetworkRecord* sharedInstance = nil;
     self.threadCallStacks = [[NSMutableArray alloc] init];
     self.finishStatus = [[NSMutableArray alloc] init];
     self.requestInfo = [[NSMutableArray alloc] init];
-    self.tongbuInfo = [[NSMutableArray alloc] init];
     
-    self.requestInfo = [[NSMutableArray alloc] init];
+    self.finishInfo = [[NSMutableArray alloc] init];
+    self.errorInfo = [[NSMutableArray alloc] init];
     
     FRDeviceInfo *deviceInfo = [[FRDeviceInfo alloc] init];
     self.carrierDic = [deviceInfo getCarrierInfo];
@@ -149,9 +149,9 @@ __strong static FRNetworkRecord* sharedInstance = nil;
 {
     [_threadCallStacks addObject:[NSThread callStackSymbols]];
     
-    
-    NSMutableDictionary *dict = _requestInfo[[self currentConnIndex:connection]];
-    [dict setValue:[NSNumber numberWithBool:YES] forKey:@"isError"];
+    NSInteger index = [self currentConnIndex:connection];
+    NSMutableDictionary *dict = _requestInfo[index];
+//    [dict setValue:[NSNumber numberWithBool:YES] forKey:@"isError"];
     
     NSInteger errorCode = error.code;
     switch (errorCode) {
@@ -177,6 +177,13 @@ __strong static FRNetworkRecord* sharedInstance = nil;
         default:
             break;
     }
+    
+    if (self.errorInfo.count<=100) {
+        [self.errorInfo addObject:dict];
+    }
+    [self.requestInfo removeObjectAtIndex:index];
+    
+    
     NSObject *obj = [self getDelegateFormConnection:connection];
     SEL sel = _cmd;
     if ([obj respondsToSelector:sel]) {
@@ -267,18 +274,17 @@ __strong static FRNetworkRecord* sharedInstance = nil;
 - (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response
 {
     [_startTimeArray addObject:[NSDate date]];
-    
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:self.carrierDic];
-//    [dict setValue:[NSNumber numberWithBool:NO] forKey:@"isError"];
-    [dict setValue:[NSString stringWithFormat:@"%@",request.URL] forKey:@"url"];
-    
-    
-    NSMutableDictionary *pas = [NSMutableDictionary dictionary];
-    [pas setValuesForKeysWithDictionary:[request allHTTPHeaderFields]];
-    [dict setValue:pas forKey:@"pas"];
-    
-    
-    [_requestInfo addObject:dict];
+    NSString *urlStr = [NSString stringWithFormat:@"%@",request.URL];
+    if ([urlStr rangeOfString:locationHttp].location==NSNotFound) {
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:self.carrierDic];
+        [dict setValue:[NSString stringWithFormat:@"%@",request.URL] forKey:@"url"];
+        NSMutableDictionary *pas = [NSMutableDictionary dictionary];
+        [pas setValuesForKeysWithDictionary:[request allHTTPHeaderFields]];
+        [dict setValue:pas forKey:@"pas"];
+        
+        
+        [_requestInfo addObject:dict];
+    }
     
     id<NSURLConnectionDataDelegate> obj = [self getDelegateFormConnection:connection];
     SEL sel = _cmd;
@@ -409,7 +415,8 @@ totalBytesExpectedToWrite:totalBytesExpectedToWrite];
     NSDate *startDate = _startTimeArray[[_connArray indexOfObject:connection]];
     NSTimeInterval startTime = [startDate timeIntervalSince1970];
     
-    NSMutableDictionary *dict = _requestInfo[[self currentConnIndex:connection]];
+    NSInteger index = [self currentConnIndex:connection];
+    NSMutableDictionary *dict = _requestInfo[index];
     NSString *responseTime = [NSString stringWithFormat:@"%f",currentTime-startTime];
     [dict setValue:responseTime forKey:@"ret"];
     
@@ -420,7 +427,13 @@ totalBytesExpectedToWrite:totalBytesExpectedToWrite];
     [dict setValue:[NSString stringWithFormat:@"%f",currentTime] forKey:@"tm"];
     
     
-    [dict setValue:[NSNumber numberWithBool:NO] forKey:@"isError"];
+//    [dict setValue:[NSNumber numberWithBool:NO] forKey:@"isError"];
+    
+    if (self.finishInfo.count<=50) {
+        [self.finishInfo addObject:dict];
+    }
+    [self.requestInfo removeObjectAtIndex:index];
+    
     
     NSObject *obj = [self getDelegateFormConnection:connection];
     SEL sel = _cmd;
