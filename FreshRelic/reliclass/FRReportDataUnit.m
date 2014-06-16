@@ -161,8 +161,9 @@
                 [self.cpuArray removeAllObjects];
                 [self.memoryArray removeAllObjects];
                 //删除采集的http信息
-                [[FRNetworkRecord sharedFRNetworkRecord].finishInfo removeAllObjects];
-                [[FRNetworkRecord sharedFRNetworkRecord].errorInfo removeAllObjects];
+//                [[FRNetworkRecord sharedFRNetworkRecord].finishInfo removeAllObjects];
+//                [[FRNetworkRecord sharedFRNetworkRecord].errorInfo removeAllObjects];
+                [[FRNetworkRecord sharedFRNetworkRecord] removeFRInfo];
             }
         }
     }];

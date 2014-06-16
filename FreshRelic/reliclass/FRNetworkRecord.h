@@ -35,8 +35,6 @@
 //响应时间  Date
 @property (nonatomic,retain) NSMutableArray *responseTimeArray;
 
-//结束时间  Date
-@property (nonatomic,retain) NSMutableArray *endTimeArray;
 
 //响应的数据  Data
 @property (nonatomic,retain) NSMutableArray *dataArray;
@@ -58,6 +56,9 @@
 
 //运营商，网络类型信息
 @property(nonatomic,retain)NSDictionary *carrierDic;
+
+// 删除所有数组、字典、内存中采集的信息
+-(void)removeFRInfo;
 
 @end
 

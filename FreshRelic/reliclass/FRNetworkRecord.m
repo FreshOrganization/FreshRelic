@@ -25,6 +25,8 @@ _Pragma("clang diagnostic pop") \
         FRNetworkRecord *record = [FRNetworkRecord sharedFRNetworkRecord];
         
         [record.connArray addObject:conn];
+        [record.dataArray addObject:[NSMutableData data]];
+        
         if (delegate) {
             [record.delegateArray addObject:delegate];
         }else
@@ -52,7 +54,6 @@ __strong static FRNetworkRecord* sharedInstance = nil;
     self.delegateArray = [[NSMutableArray alloc] init];
     self.startTimeArray = [[NSMutableArray alloc] init];
     self.responseTimeArray = [[NSMutableArray alloc] init];
-    self.endTimeArray = [[NSMutableArray alloc] init];
     self.dataArray = [[NSMutableArray alloc] init];
     self.responseArray = [[NSMutableArray alloc] init];
     self.threadCallStacks = [[NSMutableArray alloc] init];
@@ -181,9 +182,7 @@ __strong static FRNetworkRecord* sharedInstance = nil;
     if (self.errorInfo.count<=100) {
         [self.errorInfo addObject:dict];
     }
-    [self.requestInfo removeObjectAtIndex:index];
-    
-    
+
     NSObject *obj = [self getDelegateFormConnection:connection];
     SEL sel = _cmd;
     if ([obj respondsToSelector:sel]) {
@@ -304,7 +303,7 @@ __strong static FRNetworkRecord* sharedInstance = nil;
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     [_responseTimeArray addObject:[NSDate date]];
-    [_dataArray addObject:[NSMutableData data]];
+//    [_dataArray addObject:[NSMutableData data]];
     
     NSTimeInterval currentTime = [[NSDate date] timeIntervalSince1970];
     NSDate *startDate = _startTimeArray[[_connArray indexOfObject:connection]];
@@ -329,9 +328,6 @@ __strong static FRNetworkRecord* sharedInstance = nil;
     }
     
     
-    
-
-    [_responseTimeArray addObject:response];
     NSObject *obj = [self getDelegateFormConnection:connection];
     SEL sel = _cmd;
     if ([obj respondsToSelector:sel]) {
@@ -407,9 +403,6 @@ totalBytesExpectedToWrite:totalBytesExpectedToWrite];
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    [_endTimeArray addObject:[NSDate date]];
-    
-    
     
     NSTimeInterval currentTime = [[NSDate date] timeIntervalSince1970];
     NSDate *startDate = _startTimeArray[[_connArray indexOfObject:connection]];
@@ -432,8 +425,6 @@ totalBytesExpectedToWrite:totalBytesExpectedToWrite];
     if (self.finishInfo.count<=50) {
         [self.finishInfo addObject:dict];
     }
-    [self.requestInfo removeObjectAtIndex:index];
-    
     
     NSObject *obj = [self getDelegateFormConnection:connection];
     SEL sel = _cmd;
@@ -482,5 +473,19 @@ totalBytesExpectedToWrite:totalBytesExpectedToWrite];
 }
  */
 
+-(void)removeFRInfo
+{
+    [self.requestInfo removeAllObjects];
+    [self.finishInfo removeAllObjects];
+    [self.errorInfo removeAllObjects];
+    [self.connArray removeAllObjects];
+    [self.delegateArray removeAllObjects];
+    [self.startTimeArray removeAllObjects];
+    [self.responseTimeArray removeAllObjects];
+    [self.dataArray removeAllObjects];
+    [self.responseArray removeAllObjects];
+    [self.threadCallStacks removeAllObjects];
+    [self.finishStatus removeAllObjects];
+}
 
 @end
