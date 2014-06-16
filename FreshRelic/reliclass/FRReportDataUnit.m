@@ -49,8 +49,7 @@
     self.memoryArray = [[NSMutableArray alloc] initWithCapacity:20];
     self.appKey = appkey;
     self.isAllowUseLocation = allow;
-    //    NSURL *url = [NSURL URLWithString:@"http://apm-collector.testin.cn/mobile/v1/data/npi/register"];
-    NSURL *url = [NSURL URLWithString:@""];
+    NSURL *url = [NSURL URLWithString:FRInitURL];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     [request setHTTPMethod:@"POST"];
     
@@ -95,7 +94,7 @@
     // 异常捕获注册
     InstallUncaughtExceptionHandler();
     
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(reportDataTimer) userInfo:nil repeats:YES];
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(reportDataTimer) userInfo:nil repeats:YES];
     [timer fire];
     
     //采集cpu和内存使用率
@@ -110,8 +109,7 @@
 //上报数据 是否crash
 -(void)reportDataToServer:(BOOL)isCrash{
     NSLog(@"reportDataToServer");
-    //    NSURL *url = [NSURL URLWithString:@"http://apm-collector.testin.cn/mobile/v1/data/npi/submit"];
-    NSURL *url = [NSURL URLWithString:@""];
+    NSURL *url = [NSURL URLWithString:FRUploadURL];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     [request setHTTPMethod:@"POST"];
     

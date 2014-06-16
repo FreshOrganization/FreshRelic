@@ -12,7 +12,7 @@
 #import <sys/sysctl.h>
 #import <mach/mach.h>
 #import "FRMyKeyChainHelper.h"
-#import "Reachability.h"
+#import "FRreachability.h"
 
 @implementation FRDeviceInfo
 
@@ -132,7 +132,7 @@
 //    NSLog(@"network %@",networkInfo.currentRadioAccessTechnology);//7.0
 //    NSLog(@"net %@",networkInfo.subscriberCellularProvider.carrierName);
     NSString *net_type;
-    if ([[Reachability reachabilityForLocalWiFi]currentReachabilityStatus]!=NotReachable ) {
+    if ([[FRreachability reachabilityForLocalWiFi]currentReachabilityStatus]!=NotReachable ) {
         net_type = @"1";//
     }else{
         net_type = @"0";

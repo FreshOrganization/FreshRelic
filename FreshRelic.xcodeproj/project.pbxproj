@@ -10,8 +10,8 @@
 		185319B0193B77D600ABCEF4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 185319AF193B77D600ABCEF4 /* CoreTelephony.framework */; };
 		18661C09193B168E00F8F2C9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18661C08193B168E00F8F2C9 /* CoreLocation.framework */; };
 		1897B011194DB1F000BC9E13 /* FRReportDataUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1897B010194DB1F000BC9E13 /* FRReportDataUnit.m */; };
-		1897B014194DB2D800BC9E13 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1897B012194DB2D800BC9E13 /* Reachability.m */; };
 		65BF6BA71935ADB900483ADE /* FRNetworkRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BF6BA61935ADB900483ADE /* FRNetworkRecord.m */; };
+		700E8F49194E923F009E002B /* FRreachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 700E8F48194E923F009E002B /* FRreachability.m */; };
 		702F028F1935DDE3007273B6 /* FRDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 702F028E1935DDE3007273B6 /* FRDeviceInfo.m */; };
 		706A6EB01946F22600FB0636 /* FRUncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 706A6EAF1946F22600FB0636 /* FRUncaughtExceptionHandler.m */; };
 		708AF98E192DF57600A277F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 708AF98D192DF57600A277F5 /* Foundation.framework */; };
@@ -75,10 +75,10 @@
 		18661C08193B168E00F8F2C9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		1897B00F194DB1F000BC9E13 /* FRReportDataUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRReportDataUnit.h; sourceTree = "<group>"; };
 		1897B010194DB1F000BC9E13 /* FRReportDataUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRReportDataUnit.m; sourceTree = "<group>"; };
-		1897B012194DB2D800BC9E13 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		1897B013194DB2D800BC9E13 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		65BF6BA51935ADB900483ADE /* FRNetworkRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRNetworkRecord.h; sourceTree = "<group>"; };
 		65BF6BA61935ADB900483ADE /* FRNetworkRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRNetworkRecord.m; sourceTree = "<group>"; };
+		700E8F47194E923F009E002B /* FRreachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRreachability.h; sourceTree = "<group>"; };
+		700E8F48194E923F009E002B /* FRreachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRreachability.m; sourceTree = "<group>"; };
 		702F028D1935DDE3007273B6 /* FRDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRDeviceInfo.h; sourceTree = "<group>"; };
 		702F028E1935DDE3007273B6 /* FRDeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRDeviceInfo.m; sourceTree = "<group>"; };
 		706A6EAE1946F22600FB0636 /* FRUncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRUncaughtExceptionHandler.h; sourceTree = "<group>"; };
@@ -244,8 +244,8 @@
 		9F9A9CFF192E3CBD0042D76E /* reliclass */ = {
 			isa = PBXGroup;
 			children = (
-				1897B012194DB2D800BC9E13 /* Reachability.m */,
-				1897B013194DB2D800BC9E13 /* Reachability.h */,
+				700E8F47194E923F009E002B /* FRreachability.h */,
+				700E8F48194E923F009E002B /* FRreachability.m */,
 				E408CECC194D4B66007F579B /* JRSwizzle.h */,
 				E408CECD194D4B66007F579B /* JRSwizzle.m */,
 				9FC8E1841948A1A500E29F04 /* FRMyKeyChainHelper.h */,
@@ -424,7 +424,7 @@
 				708AF99A192DF57600A277F5 /* main.m in Sources */,
 				702F028F1935DDE3007273B6 /* FRDeviceInfo.m in Sources */,
 				1897B011194DB1F000BC9E13 /* FRReportDataUnit.m in Sources */,
-				1897B014194DB2D800BC9E13 /* Reachability.m in Sources */,
+				700E8F49194E923F009E002B /* FRreachability.m in Sources */,
 				9FC8E1861948A1A500E29F04 /* FRMyKeyChainHelper.m in Sources */,
 				E408CECE194D4B66007F579B /* JRSwizzle.m in Sources */,
 				9F9A9D45192E3E170042D76E /* FRAppAgent.m in Sources */,

@@ -11,6 +11,8 @@
 #define FR_Protocal_Ver @"1.0"
 #define FRVersion @"1.0"
 #define FRUUID @"FRUUID"
+#define FRInitURL @"http://apm-collector.testin.cn/mobile/v1/data/npi/register"
+#define FRUploadURL @"http://apm-collector.testin.cn/mobile/v1/data/npi/submit"
 
 @interface FRDeviceInfo : NSObject
 
